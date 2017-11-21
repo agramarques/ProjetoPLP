@@ -36,7 +36,7 @@ oper :: String -> Stack -> Stack
 oper c x
 	| isNumber c = ((read c::Double):x)
 	| c `elem` ["+","-","*","/"] = opBin c x
-	| c `elem` ["ln", "exp", "sqrt"] = opUn c x
+	| c `elem` ["ln", "exp", "sqrt", "sin", "cos", "tan"] = opUn c x
 	
 calc :: Stack -> IO()
 calc xs = do
