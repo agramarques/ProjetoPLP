@@ -1,4 +1,5 @@
 import System.Process
+import Data.Char (toLower)
 
 type Stack = [Double]
 
@@ -41,9 +42,10 @@ calc :: Stack -> IO()
 calc xs = do
 	system "cls" >> print xs
 	comando <- getLine
-	if comando == "quit"
-		then return ()
-		else calc (oper comando xs)
+	let comm = (map toLower comando) in
+		if comm == "quit"
+			then return ()
+			else calc (oper comm xs) -- calc retorna uma stack modificada, então dá pra chamar calc de novo em cima da nova stack
 	
 main :: IO()
 main = do
