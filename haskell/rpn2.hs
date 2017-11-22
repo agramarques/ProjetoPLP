@@ -12,6 +12,7 @@ opBin c (x:y:xs)
  | c == "*" = (y*x):xs
  | c == "/" = (y/x):xs
  | c == "^" = (y**x):xs
+ | c == "root" = y**(1/x) : xs
 
 opUn :: String -> Stack -> Stack
 opUn _ [] = []
@@ -36,13 +37,13 @@ a pilha devidamente modificada -}
 oper :: String -> Stack -> Stack
 oper c x
  | isNumber c = ((read c::Double):x)
- | c `elem` ["+","-","*","/","^"] = opBin c x
+ | c `elem` ["+","-","*","/","^", "root"] = opBin c x
  | c `elem` ["ln", "exp", "sqrt", "sin", "cos", "tan"] = opUn c x
 
 calc :: Stack -> IO()
 calc xs = do
- --system "clear" >> print xs
- system "cls" >> print xs
+ --system "clear" >> print xs -- comando limpeza terminal OSX
+ system "cls" >> print xs -- comando limpeza console Windows
  comando <- getLine
  let comm = (map toLower comando) in
   if comm == "quit"
