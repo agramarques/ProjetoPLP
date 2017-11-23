@@ -52,6 +52,7 @@ oper c x
  | isNumber c = (read c::Double) : x
  | c `elem` ["+","-","*","/","^", "root", "cilindro"] = opBin c x
  | c `elem` ["ln", "exp", "sqrt", "sin", "cos", "tan", "!", "esfera"] = opUn c x
+ | otherwise = x
 
 calc :: Stack -> IO()
 calc xs = do
