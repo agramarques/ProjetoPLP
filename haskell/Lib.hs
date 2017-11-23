@@ -56,7 +56,7 @@ oper c x
 
 calc :: Stack -> IO()
 calc xs = do
- system "clear" >> print xs -- comando limpeza terminal OSX
+ system "clear" >> mapM_ print (reverse xs) -- comando limpeza terminal OSX
 --system "cls" >> print xs -- comando limpeza console Windows
  comando <- getLine
  let comm = map toLower comando in
