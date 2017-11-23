@@ -18,7 +18,7 @@ opBin c (x:y:xs)
  | c == "/" = (y/x):xs
  | c == "^" = (y**x):xs
  | c == "root" = y**(1/x) : xs
- | c == "volCilin" = (volCilindro x y) : xs
+ | c == "cilindro" = 3.14*x*(y^2) : xs
 
 opUn :: String -> Stack -> Stack
 opUn _ [] = []
@@ -29,18 +29,12 @@ opUn c (x:xs)
  | c == "sin" = (sin x):xs
  | c == "cos" = (cos x):xs
  | c == "tan" = (tan x):xs
- | c == "volEsfera" = (volEsfera x): xs
- {-| c == "!" = fatorial(x) : xs  ter cuidado pois fatorial ta recebendo e enviando integer -}
+ | c == "esfera" = (3.14*4*(x^3))/3: xs
+ | c == "!" = fatorial(x) : xs  --ter cuidado pois fatorial ta recebendo e enviando integer -}
 
-fatorial :: Integer -> Integer
+fatorial :: Double -> Double
 fatorial 0 = 1
 fatorial n = n * fatorial(n-1)
-
-volCilindro :: Double -> Double -> Double
-volCilindro r h = pi * (r ^ 2) * h
-
-volEsfera :: Double -> Double
-volEsfera r = pi * (r ^ 3) * (4/3.0)
 
 isNumber :: String -> Bool
 isNumber str =
@@ -48,15 +42,14 @@ isNumber str =
   [(_,"")] -> True
   _   -> False
 
-
 {- op��o para caso use uma caixa de entrada a parte para ir entrando com cada comando
 recebe o comando como uma string, para decidir que opera��o realizar e a pilha, retornando
 a pilha devidamente modificada -}
 oper :: String -> Stack -> Stack
 oper c x
  | isNumber c = ((read c::Double):x)
- | c `elem` ["+","-","*","/","^", "root"] = opBin c x
- | c `elem` ["ln", "exp", "sqrt", "sin", "cos", "tan", "!"] = opUn c x
+ | c `elem` ["+","-","*","/","^", "root", "cilindro"] = opBin c x
+ | c `elem` ["ln", "exp", "sqrt", "sin", "cos", "tan", "!", "esfera"] = opUn c x
 
 calc :: Stack -> IO()
 calc xs = do
