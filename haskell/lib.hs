@@ -10,27 +10,27 @@ type Stack = [Double]
 
 opBin :: String -> Stack -> Stack
 opBin _ [] = [] --talvez lan�ar um erro, se for na GUI ver como dar um aviso
-opBin _ (x:[]) = x:[] --nao opera sobre apenas um operando
+opBin _ [x] = [x] --nao opera sobre apenas um operando
 opBin c (x:y:xs)
  | c == "+" = (y+x):xs
  | c == "-" = (y-x):xs
  | c == "*" = (y*x):xs
  | c == "/" = (y/x):xs
- | c == "^" = (y**x):xs
+ | c == "^" = (y**x) : xs
  | c == "root" = y**(1/x) : xs
- | c == "cilindro" = 3.14*x*(y^2) : xs
+ | c == "cilindro" = 3.14*x*(y**2) : xs
 
 opUn :: String -> Stack -> Stack
 opUn _ [] = []
 opUn c (x:xs)
- | c == "ln" = (log x):xs
- | c == "exp" = (exp x):xs
- | c == "sqrt" = (sqrt x):xs
- | c == "sin" = (sin x):xs
- | c == "cos" = (cos x):xs
- | c == "tan" = (tan x):xs
- | c == "esfera" = (3.14*4*(x^3))/3: xs
- | c == "!" = fatorial(x) : xs  --ter cuidado pois fatorial ta recebendo e enviando integer -}
+ | c == "ln" = log x : xs
+ | c == "exp" = exp x : xs
+ | c == "sqrt" = sqrt x : xs
+ | c == "sin" = sin x : xs
+ | c == "cos" = cos x : xs
+ | c == "tan" = tan x : xs
+ | c == "esfera" = (3.14*4*(x**3))/3: xs
+ | c == "!" = fatorial x : xs  --ter cuidado pois fatorial ta recebendo e enviando integer -}
 
 fatorial :: Double -> Double
 fatorial n
@@ -40,7 +40,7 @@ fatorial n
 
 isNumber :: String -> Bool
 isNumber str =
- case (reads str) :: [(Double, String)] of
+ case reads str :: [(Double, String)] of
   [(_,"")] -> True
   _   -> False
 
@@ -49,7 +49,7 @@ recebe o comando como uma string, para decidir que opera��o realizar e a pil
 a pilha devidamente modificada -}
 oper :: String -> Stack -> Stack
 oper c x
- | isNumber c = ((read c::Double):x)
+ | isNumber c = (read c::Double) : x
  | c `elem` ["+","-","*","/","^", "root", "cilindro"] = opBin c x
  | c `elem` ["ln", "exp", "sqrt", "sin", "cos", "tan", "!", "esfera"] = opUn c x
 
@@ -58,7 +58,7 @@ calc xs = do
  system "clear" >> print xs -- comando limpeza terminal OSX
 --system "cls" >> print xs -- comando limpeza console Windows
  comando <- getLine
- let comm = (map toLower comando) in
+ let comm = map toLower comando in
   if comm == "quit"
     then return ()
     else calc (oper comm xs) -- calc retorna uma stack modificada, ent�o d� pra chamar calc de novo em cima da nova stack
