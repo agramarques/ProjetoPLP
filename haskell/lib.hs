@@ -28,6 +28,11 @@ opUn c (x:xs)
  | c == "sin" = (sin x):xs
  | c == "cos" = (cos x):xs
  | c == "tan" = (tan x):xs
+ | c == "!" = fatorial(x) : xs
+
+fatorial :: Double -> Double
+fatorial 1 = 1
+fatorial x = x*fatorial(x-1)
 
 isNumber :: String -> Bool
 isNumber str =
@@ -43,7 +48,7 @@ oper :: String -> Stack -> Stack
 oper c x
  | isNumber c = ((read c::Double):x)
  | c `elem` ["+","-","*","/","^", "root"] = opBin c x
- | c `elem` ["ln", "exp", "sqrt", "sin", "cos", "tan"] = opUn c x
+ | c `elem` ["ln", "exp", "sqrt", "sin", "cos", "tan", "!"] = opUn c x
 
 calc :: Stack -> IO()
 calc xs = do
