@@ -33,8 +33,10 @@ opUn c (x:xs)
  | c == "!" = fatorial(x) : xs  --ter cuidado pois fatorial ta recebendo e enviando integer -}
 
 fatorial :: Double -> Double
-fatorial 0 = 1
-fatorial n = n * fatorial(n-1)
+fatorial n
+ | n == 0 = 1
+ | n < 0 = n*fatorial(n+1)
+ | otherwise = n*fatorial(n-1)
 
 isNumber :: String -> Bool
 isNumber str =
