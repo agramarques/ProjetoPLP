@@ -18,6 +18,7 @@ opBin c (x:y:xs)
  | c == "/" = (y/x):xs
  | c == "^" = (y**x):xs
  | c == "root" = y**(1/x) : xs
+ | c == "volCilin" = (volCilindro x y) : xs
 
 opUn :: String -> Stack -> Stack
 opUn _ [] = []
@@ -28,11 +29,18 @@ opUn c (x:xs)
  | c == "sin" = (sin x):xs
  | c == "cos" = (cos x):xs
  | c == "tan" = (tan x):xs
- | c == "!" = fatorial(x) : xs
+ | c == "volEsfera" = (volEsfera x): xs
+ {-| c == "!" = fatorial(x) : xs  ter cuidado pois fatorial ta recebendo e enviando integer -}
 
-fatorial :: Double -> Double
-fatorial 1 = 1
-fatorial x = x*fatorial(x-1)
+fatorial :: Integer -> Integer
+fatorial 0 = 1
+fatorial n = n * fatorial(n-1)
+
+volCilindro :: Double -> Double -> Double
+volCilindro r h = pi * (r ^ 2) * h
+
+volEsfera :: Double -> Double
+volEsfera r = pi * (r ^ 3) * (4/3.0)
 
 isNumber :: String -> Bool
 isNumber str =
