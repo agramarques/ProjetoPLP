@@ -1,6 +1,6 @@
-module calc where
+module Calc where
 
-import lib
+import Lib
 
 main :: IO ()
 main = calc []

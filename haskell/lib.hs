@@ -1,4 +1,4 @@
-module lib
+module Lib
     (
     calc
     ) where
