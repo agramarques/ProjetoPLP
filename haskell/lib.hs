@@ -9,7 +9,7 @@ import Data.Char (toLower)
 type Stack = [Double]
 
 opBin :: String -> Stack -> Stack
-opBin _ [] = [] --talvez lan�ar um erro, se for na GUI ver como dar um aviso
+opBin _ [] = [] --talvez lançar um erro, se for na GUI ver como dar um aviso
 opBin _ [x] = [x] --nao opera sobre apenas um operando
 opBin c (x:y:xs)
  | c == "+" = (y+x):xs
@@ -44,8 +44,8 @@ isNumber str =
   [(_,"")] -> True
   _   -> False
 
-{- op��o para caso use uma caixa de entrada a parte para ir entrando com cada comando
-recebe o comando como uma string, para decidir que opera��o realizar e a pilha, retornando
+{- opção para caso use uma caixa de entrada a parte para ir entrando com cada comando
+recebe o comando como uma string, para decidir que operação realizar e a pilha, retornando
 a pilha devidamente modificada -}
 oper :: String -> Stack -> Stack
 oper c x
@@ -62,4 +62,4 @@ calc xs = do
  let comm = map toLower comando in
   if comm == "quit"
     then return ()
-    else calc (oper comm xs) -- calc retorna uma stack modificada, ent�o d� pra chamar calc de novo em cima da nova stack
+    else calc (oper comm xs) -- calc retorna uma stack modificada, então dá pra chamar calc de novo em cima da nova stack
