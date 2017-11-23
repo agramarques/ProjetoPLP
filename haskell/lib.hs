@@ -62,8 +62,3 @@ calc xs = do
   if comm == "quit"
     then return ()
     else calc (oper comm xs) -- calc retorna uma stack modificada, ent�o d� pra chamar calc de novo em cima da nova stack
-
---main :: IO()
---main = do
--- calc []
--- return ()
