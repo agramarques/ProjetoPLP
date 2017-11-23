@@ -1,5 +1,3 @@
-module Calc where
-
 import Lib
 
 main :: IO ()
