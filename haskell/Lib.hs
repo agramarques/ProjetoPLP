@@ -19,6 +19,7 @@ opBin c (x:y:xs)
  | c == "^" = (y**x) : xs
  | c == "root" = y**(1/x) : xs
  | c == "cilindro" = 3.14*x*(y**2) : xs
+ | c == "swap" = y:x:xs
 
 opUn :: String -> Stack -> Stack
 opUn _ [] = []
@@ -43,6 +44,14 @@ isNumber str =
  case reads str :: [(Double, String)] of
   [(_,"")] -> True
   _   -> False
+  
+if' :: Bool -> a -> a -> a
+if' True  x _ = x
+if' False _ y = y
+
+infixl 1 ?
+(?) :: Bool -> a -> a -> a
+(?) = if'
 
 typeHelp :: Stack -> IO()
 typeHelp xs = do
@@ -72,19 +81,24 @@ a pilha devidamente modificada -}
 oper :: String -> Stack -> Stack
 oper c x
  | isNumber c = (read c::Double) : x
- | c `elem` ["+","-","*","/","^", "root", "cilindro"] = opBin c x
+ | c `elem` ["+","-","*","/","^", "root", "cilindro", "swap"] = opBin c x
  | c `elem` ["ln", "exp", "sqrt", "sin", "cos", "tan", "!", "esfera"] = opUn c x
  | otherwise = x
 
 calc :: Stack -> IO()
 calc xs = do
- system "clear" >> mapM_ print (reverse xs) -- comando limpeza terminal OSX
---system "cls" >> print xs -- comando limpeza console Windows
+-- system "clear" >> mapM_ print (reverse xs) -- comando limpeza terminal OSX
+ system "cls" >> mapM_ print (reverse xs) -- comando limpeza console Windows
  comando <- getLine
  let comm = map toLower comando in
-   
+  comm == "quit" ? return() $
+  comm == "clear" ? calc [] $
+  comm == "help" ? typeHelp (xs) $
+    calc (oper comm xs)
+  {- 
   if comm == "quit" || comm == "help"
     then if comm == "quit"
 			then return ()
 			else typeHelp (xs)
     else calc (oper comm xs) -- calc retorna uma stack modificada, então dá pra chamar calc de novo em cima da nova stack
+-}
