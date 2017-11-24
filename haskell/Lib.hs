@@ -31,7 +31,7 @@ opUn c (x:xs)
  | c == "cos" = cos x : xs
  | c == "tan" = tan x : xs
  | c == "esfera" = (3.14*4*(x**3))/3: xs
- | c == "!" = fatorial x : xs  --ter cuidado pois fatorial ta recebendo e enviando integer -}
+ | c == "!" = fatAux x : xs  
  
 operWhole :: String -> Stack -> Stack
 operWhole _ [] = []
@@ -43,13 +43,14 @@ operWhole c xs
 mean :: Stack -> Double
 mean xs = (sum xs)/(fromIntegral (length xs))	
 
-fatorial :: Double -> Double
-fatorial n
+fatAux :: Double -> Double
+fatAux x = fromInteger $ fatorial (truncate x::Integer)
+
+fatorial :: Integer -> Integer
+fatorial x
  | x == 0 = 1
  | x < 0 = x*fatorial(x+1)
  | otherwise = x*fatorial(x-1)
- where
-   x = fromIntegral (truncate n)
 
 isNumber :: String -> Bool
 isNumber str =
@@ -91,7 +92,6 @@ typeHelp xs = do
 	resposta <- getLine
 
 	calc xs
-{- INACABADO -}
 
 unOps = ["ln", "exp", "sqrt", "sin", "cos", "tan", "!", "esfera"]
 binOps = ["+","-","*","/","^", "root", "cilindro", "swap"]
