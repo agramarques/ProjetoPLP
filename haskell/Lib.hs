@@ -32,6 +32,16 @@ opUn c (x:xs)
  | c == "tan" = tan x : xs
  | c == "esfera" = (3.14*4*(x**3))/3: xs
  | c == "!" = fatorial x : xs  --ter cuidado pois fatorial ta recebendo e enviando integer -}
+ 
+operWhole :: String -> Stack -> Stack
+operWhole _ [] = []
+operWhole c xs
+	| c == "mean" = [mean xs]
+	| c == "sum" = [sum xs]
+	| c == "prod" = [product xs]
+
+mean :: Stack -> Double
+mean xs = (sum xs)/(fromIntegral (length xs))	
 
 fatorial :: Double -> Double
 fatorial n
@@ -70,9 +80,12 @@ typeHelp xs = do
 		\  tan          Tangente de um ângulo. Requer um número da pilha.\n\
 		\  esfera       Volume da esfera dado o raio. Requer um número da pilha.\n\
 		\  !            Fatorial. Requer um número da pilha. \n\
-    \  swap         Faz a troca de dois números da pilha. \n\
-    \  clear        Limpa a pilha da calculadora. \n\
-    \  help         Mostra os comandos disponiveis da calculadora. \n\n\
+        \  swap         Faz a troca de dois números da pilha. \n\
+        \  clear        Limpa a pilha da calculadora. \n\
+        \  help         Mostra os comandos disponiveis da calculadora. \n\
+		\  sum          Somatório. Consome toda a pilha. \n\
+		\  prod         Produtório. Consome toda a pilha. \n\
+		\  mean         Média Aritmética. Consome toda a pilha. \n\n\
 		\Quando quiser sair do guia de ajuda digite qualquer tecla."
 	putStrLn(help)
 	resposta <- getLine
@@ -88,6 +101,7 @@ oper c x
  | isNumber c = (read c::Double) : x
  | c `elem` ["+","-","*","/","^", "root", "cilindro", "swap"] = opBin c x
  | c `elem` ["ln", "exp", "sqrt", "sin", "cos", "tan", "!", "esfera"] = opUn c x
+ | c `elem` ["mean", "sum", "prod"] = operWhole c x
  | otherwise = x
 
 calc :: Stack -> IO()
@@ -100,10 +114,4 @@ calc xs = do
   comm == "clear" ? calc [] $
   comm == "help" ? typeHelp (xs) $
     calc (oper comm xs)
-  {-
-  if comm == "quit" || comm == "help"
-    then if comm == "quit"
-			then return ()
-			else typeHelp (xs)
-    else calc (oper comm xs) -- calc retorna uma stack modificada, então dá pra chamar calc de novo em cima da nova stack
--}
+
