@@ -86,12 +86,17 @@ typeHelp xs = do
 		\  sum          Somatório. Consome toda a pilha. \n\
 		\  prod         Produtório. Consome toda a pilha. \n\
 		\  mean         Média Aritmética. Consome toda a pilha. \n\n\
-		\Quando quiser sair do guia de ajuda digite qualquer tecla."
+		\Quando quiser sair do guia de ajuda digite Enter."
 	putStrLn(help)
 	resposta <- getLine
 
 	calc xs
 {- INACABADO -}
+
+unOps = ["ln", "exp", "sqrt", "sin", "cos", "tan", "!", "esfera"]
+binOps = ["+","-","*","/","^", "root", "cilindro", "swap"]
+wholeOps = ["mean", "sum", "prod"]
+opList = unOps ++ binOps ++ wholeOps
 
 {- opção para caso use uma caixa de entrada a parte para ir entrando com cada comando
 recebe o comando como uma string, para decidir que operação realizar e a pilha, retornando
@@ -99,9 +104,9 @@ a pilha devidamente modificada -}
 oper :: String -> Stack -> Stack
 oper c x
  | isNumber c = (read c::Double) : x
- | c `elem` ["+","-","*","/","^", "root", "cilindro", "swap"] = opBin c x
- | c `elem` ["ln", "exp", "sqrt", "sin", "cos", "tan", "!", "esfera"] = opUn c x
- | c `elem` ["mean", "sum", "prod"] = operWhole c x
+ | c `elem` binOps = opBin c x
+ | c `elem` unOps = opUn c x
+ | c `elem` wholeOps = operWhole c x
  | otherwise = x
 
 calc :: Stack -> IO()
@@ -113,5 +118,6 @@ calc xs = do
   comm == "quit" ? return() $
   comm == "clear" ? calc [] $
   comm == "help" ? typeHelp (xs) $
+  not (isNumber comm || comm `elem` opList) ? ((putStrLn "Operacao invalida, tente \"help\" para ver as funcoes disponiveis. Pressione Enter para continuar") >> getLine >> (calc (oper comm xs))) $
     calc (oper comm xs)
 
