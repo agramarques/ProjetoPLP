@@ -44,6 +44,26 @@ isNumber str =
   [(_,"")] -> True
   _   -> False
 
+typeHelp = do
+			let help = "Comandos disponiveis: \n\n\
+		\  + - * /      Soma, subtração, multiplicação e divisão. Requer dois números da pilha.\n\
+		\  ^            Exponenciação x^y. Requer dois números da pilha. \n\
+		\  root         Exponenciação x^(1/y). Requer dois números da pilha.\n\
+		\  cilindro     Volume de um cilindro dado o raio e altura. Requer dois números da pilha.\n\
+		\  ln           Logaritmo natural. Requer um número da pilha.\n\
+		\  exp          Exponenciação de Euler e^x. Requer um número da pilha.\n\
+		\  sqrt         Raiz quadrada. Requer um número da pilha.\n\
+		\  sin          Seno de um ângulo. Requer um número da pilha.\n\
+		\  cos          Cosseno de um ângulo. Requer um número da pilha.\n\
+		\  tan          Tangente de um ângulo. Requer um número da pilha.\n\
+		\  esfera       Volume da esfera dado o raio. Requer um número da pilha.\n\
+		\  !            Fatorial. Requer um número da pilha. \n\n"
+			putStrLn(help)
+			putStr("Você deseja sair da guia de ajuda? digite 'y': ")
+			resposta <- getLine
+			putStrLn(resposta)
+{- INACABADO -}
+			
 {- opção para caso use uma caixa de entrada a parte para ir entrando com cada comando
 recebe o comando como uma string, para decidir que operação realizar e a pilha, retornando
 a pilha devidamente modificada -}
