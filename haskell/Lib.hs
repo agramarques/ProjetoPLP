@@ -39,9 +39,18 @@ operWhole c xs
 	| c == "mean" = [mean xs]
 	| c == "sum" = [sum xs]
 	| c == "prod" = [product xs]
+	| c == "geom" = [gMean xs]
+	| c == "harm" = [hMean xs]	
 
 mean :: Stack -> Double
 mean xs = (sum xs)/(fromIntegral (length xs))	
+
+hMean :: Stack -> Double	
+hMean xs = fromIntegral (length xs) / (sum $ map (1/) xs)
+	
+gMean :: Stack -> Double
+gMean xs = (product xs)**(1/(fromIntegral(length xs)))
+
 
 fatAux :: Double -> Double
 fatAux x = fromInteger $ fatorial (truncate x::Integer)
@@ -95,7 +104,7 @@ typeHelp xs = do
 
 unOps = ["ln", "exp", "sqrt", "sin", "cos", "tan", "!", "esfera"]
 binOps = ["+","-","*","/","^", "root", "cilindro", "swap"]
-wholeOps = ["mean", "sum", "prod"]
+wholeOps = ["mean", "sum", "prod", "geom", "harm"]
 opList = unOps ++ binOps ++ wholeOps
 
 {- opção para caso use uma caixa de entrada a parte para ir entrando com cada comando
