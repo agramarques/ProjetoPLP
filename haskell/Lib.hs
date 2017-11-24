@@ -69,7 +69,10 @@ typeHelp xs = do
 		\  cos          Cosseno de um ângulo. Requer um número da pilha.\n\
 		\  tan          Tangente de um ângulo. Requer um número da pilha.\n\
 		\  esfera       Volume da esfera dado o raio. Requer um número da pilha.\n\
-		\  !            Fatorial. Requer um número da pilha. \n\n\
+		\  !            Fatorial. Requer um número da pilha. \n\
+    \  swap         Faz a troca de dois números da pilha. \n\
+    \  clear        Limpa a pilha da calculadora. \n\
+    \  help         Mostra os comandos disponiveis da calculadora. \n\n\
 		\Quando quiser sair do guia de ajuda digite qualquer tecla."
 	putStrLn(help)
 	resposta <- getLine
