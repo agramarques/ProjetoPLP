@@ -35,16 +35,18 @@ opUn c (x:xs)
 
 fatorial :: Double -> Double
 fatorial n
- | n == 0 = 1
- | n < 0 = n*fatorial(n+1)
- | otherwise = n*fatorial(n-1)
+ | x == 0 = 1
+ | x < 0 = x*fatorial(x+1)
+ | otherwise = x*fatorial(x-1)
+ where
+   x = fromIntegral (truncate n)
 
 isNumber :: String -> Bool
 isNumber str =
  case reads str :: [(Double, String)] of
   [(_,"")] -> True
   _   -> False
-  
+
 if' :: Bool -> a -> a -> a
 if' True  x _ = x
 if' False _ y = y
@@ -71,10 +73,10 @@ typeHelp xs = do
 		\Quando quiser sair do guia de ajuda digite qualquer tecla."
 	putStrLn(help)
 	resposta <- getLine
-	
+
 	calc xs
 {- INACABADO -}
-			
+
 {- opção para caso use uma caixa de entrada a parte para ir entrando com cada comando
 recebe o comando como uma string, para decidir que operação realizar e a pilha, retornando
 a pilha devidamente modificada -}
@@ -95,7 +97,7 @@ calc xs = do
   comm == "clear" ? calc [] $
   comm == "help" ? typeHelp (xs) $
     calc (oper comm xs)
-  {- 
+  {-
   if comm == "quit" || comm == "help"
     then if comm == "quit"
 			then return ()
