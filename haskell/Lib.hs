@@ -44,8 +44,9 @@ isNumber str =
   [(_,"")] -> True
   _   -> False
 
-typeHelp = do
-	let help = "Comandos disponiveis: \n\n\
+typeHelp :: Stack -> IO()
+typeHelp xs = do
+	let help = "Comandos disponíveis: \n\n\
 		\  + - * /      Soma, subtração, multiplicação e divisão. Requer dois números da pilha.\n\
 		\  ^            Exponenciação x^y. Requer dois números da pilha. \n\
 		\  root         Exponenciação x^(1/y). Requer dois números da pilha.\n\
@@ -57,11 +58,12 @@ typeHelp = do
 		\  cos          Cosseno de um ângulo. Requer um número da pilha.\n\
 		\  tan          Tangente de um ângulo. Requer um número da pilha.\n\
 		\  esfera       Volume da esfera dado o raio. Requer um número da pilha.\n\
-		\  !            Fatorial. Requer um número da pilha. \n\n"
+		\  !            Fatorial. Requer um número da pilha. \n\n\
+		\Quando quiser sair do guia de ajuda digite qualquer tecla."
 	putStrLn(help)
-	putStr("Você deseja sair da guia de ajuda? digite 'y': ")
 	resposta <- getLine
-	putStrLn(resposta)
+	
+	calc xs
 {- INACABADO -}
 			
 {- opção para caso use uma caixa de entrada a parte para ir entrando com cada comando
@@ -80,6 +82,9 @@ calc xs = do
 --system "cls" >> print xs -- comando limpeza console Windows
  comando <- getLine
  let comm = map toLower comando in
-  if comm == "quit"
-    then return ()
+   
+  if comm == "quit" || comm == "help"
+    then if comm == "quit"
+			then return ()
+			else typeHelp (xs)
     else calc (oper comm xs) -- calc retorna uma stack modificada, então dá pra chamar calc de novo em cima da nova stack
