@@ -5,6 +5,7 @@ module Lib
 
 import System.Process
 import Data.Char (toLower)
+import Data.List (sort)
 
 type Stack = [Double]
 
@@ -41,6 +42,7 @@ opTer _ [x] = [x]
 opTer _ (x:y:[]) = (x:y:[])
 opTer c (x:y:z:xs)
  | c == "raizes" = (raizes z y x) ++ xs
+ | c == "heron" = (heron x y z) ++ xs
  
 operWhole :: String -> Stack -> Stack
 operWhole _ [] = []
@@ -51,6 +53,20 @@ operWhole c xs
 	| c == "geom" = [gMean xs]
 	| c == "harm" = [hMean xs]	
 
+ehTriangulo :: Double -> Double -> Double -> Bool
+ehTriangulo x y z
+ | c - (a - b) <= 0 = False
+ | otherwise = True
+ where
+  [c, b, a] = sort [x, y, z]
+	
+heron :: Double -> Double -> Double -> [Double]
+heron a b c
+ | (ehTriangulo a b c) = [sqrt (s*(s-a)*(s-b)*(s-c))]
+ | otherwise = [a, b, c]
+ where
+  s = (a+b+c)/2
+	
 raizes :: Double -> Double -> Double -> [Double]
 raizes a b c
  | delta < 0 = [c,b,a]		--aqui optei por deixar a pilha inalterada se nao houver raizes reais, dessa forma cai no aviso de operacao invalida
@@ -106,6 +122,7 @@ typeHelp xs = do
 		\  comb         Número de combinações simples. Requer dois números da pilha.\n\
 		\  arr          Número de arranjos simples. Requer dois números da pilha.\n\
 		\  raizes       Calcula as raizes reais de uma equação quadrática. Requer três números da pilha. \n\
+		\  heron        Calcula a área de um triângulo. Requer três números da pilha. \n\
 		\  ln           Logaritmo natural. Requer um número da pilha.\n\
 		\  exp          Exponenciação de Euler e^x. Requer um número da pilha.\n\
 		\  sqrt         Raiz quadrada. Requer um número da pilha.\n\
@@ -131,7 +148,7 @@ typeHelp xs = do
 unOps = ["ln", "exp", "sqrt", "sin", "cos", "tan", "!", "esfera"]
 binOps = ["+","-","*","/","^", "root", "cilindro", "swap", "comb", "arr"]
 wholeOps = ["mean", "sum", "prod", "geom", "harm"]
-terOps = ["raizes"]
+terOps = ["raizes", "heron"]
 
 operInv = "Operacao invalida, tente \"help\" para ver as funcoes disponiveis. Pressione Enter para continuar"
 
