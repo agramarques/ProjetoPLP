@@ -95,7 +95,9 @@ typeHelp xs = do
         \  help         Mostra os comandos disponiveis da calculadora. \n\
 		\  sum          Somatório. Consome toda a pilha. \n\
 		\  prod         Produtório. Consome toda a pilha. \n\
-		\  mean         Média Aritmética. Consome toda a pilha. \n\n\
+		\  mean         Média Aritmética. Consome toda a pilha. \n\
+		\  geom         Média Geométrica. Consome toda a pilha. \n\
+		\  harm         Média Harmônica. Consome toda a pilha. \n\n\
 		\Quando quiser sair do guia de ajuda digite Enter."
 	putStrLn(help)
 	resposta <- getLine
@@ -106,6 +108,8 @@ unOps = ["ln", "exp", "sqrt", "sin", "cos", "tan", "!", "esfera"]
 binOps = ["+","-","*","/","^", "root", "cilindro", "swap"]
 wholeOps = ["mean", "sum", "prod", "geom", "harm"]
 opList = unOps ++ binOps ++ wholeOps
+
+operInv = "Operacao invalida, tente \"help\" para ver as funcoes disponiveis. Pressione Enter para continuar"
 
 {- opção para caso use uma caixa de entrada a parte para ir entrando com cada comando
 recebe o comando como uma string, para decidir que operação realizar e a pilha, retornando
@@ -127,6 +131,8 @@ calc xs = do
   comm == "quit" ? return() $
   comm == "clear" ? calc [] $
   comm == "help" ? typeHelp (xs) $
-  not (isNumber comm || comm `elem` opList) ? ((putStrLn "Operacao invalida, tente \"help\" para ver as funcoes disponiveis. Pressione Enter para continuar") >> getLine >> (calc (oper comm xs))) $
-    calc (oper comm xs)
+  let y = (oper comm xs) in
+  y == xs ? ((putStrLn operInv) >> getLine >> (calc y)) $	--quando o comando nao e reconhecido, oper retorna a lista inalterada, aqui checa isso para oferecer a ajuda
+	calc y
+
 
