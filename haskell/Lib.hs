@@ -20,6 +20,8 @@ opBin c (x:y:xs)
  | c == "root" = y**(1/x) : xs
  | c == "cilindro" = 3.14*x*(y**2) : xs
  | c == "swap" = y:x:xs
+ | c == "comb" = (comb y x):xs
+ | c == "arr" = (arr y x):xs
 
 opUn :: String -> Stack -> Stack
 opUn _ [] = []
@@ -51,6 +53,11 @@ hMean xs = fromIntegral (length xs) / (sum $ map (1/) xs)
 gMean :: Stack -> Double
 gMean xs = (product xs)**(1/(fromIntegral(length xs)))
 
+comb :: Double -> Double -> Double
+comb a b = (fatAux a)/((fatAux b)*(fatAux (a-b)))
+
+arr :: Double -> Double -> Double
+arr a b = (fatAux a)/(fatAux (a-b))
 
 fatAux :: Double -> Double
 fatAux x = fromInteger $ fatorial (truncate x::Integer)
@@ -82,6 +89,8 @@ typeHelp xs = do
 		\  ^            Exponenciação x^y. Requer dois números da pilha. \n\
 		\  root         Exponenciação x^(1/y). Requer dois números da pilha.\n\
 		\  cilindro     Volume de um cilindro dado o raio e altura. Requer dois números da pilha.\n\
+		\  comb         Número de combinações simples. Requer dois números da pilha.\n\
+		\  arr          Número de arranjos simples. Requer dois números da pilha.\n\
 		\  ln           Logaritmo natural. Requer um número da pilha.\n\
 		\  exp          Exponenciação de Euler e^x. Requer um número da pilha.\n\
 		\  sqrt         Raiz quadrada. Requer um número da pilha.\n\
@@ -90,7 +99,7 @@ typeHelp xs = do
 		\  tan          Tangente de um ângulo. Requer um número da pilha.\n\
 		\  esfera       Volume da esfera dado o raio. Requer um número da pilha.\n\
 		\  !            Fatorial. Requer um número da pilha. \n\
-        \  swap         Faz a troca de dois números da pilha. \n\
+        \  swap         Faz a troca dos dois últimos números da pilha. \n\
         \  clear        Limpa a pilha da calculadora. \n\
         \  help         Mostra os comandos disponiveis da calculadora. \n\
 		\  sum          Somatório. Consome toda a pilha. \n\
@@ -105,7 +114,7 @@ typeHelp xs = do
 	calc xs
 
 unOps = ["ln", "exp", "sqrt", "sin", "cos", "tan", "!", "esfera"]
-binOps = ["+","-","*","/","^", "root", "cilindro", "swap"]
+binOps = ["+","-","*","/","^", "root", "cilindro", "swap", "comb", "arr"]
 wholeOps = ["mean", "sum", "prod", "geom", "harm"]
 opList = unOps ++ binOps ++ wholeOps
 
