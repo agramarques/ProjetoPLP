@@ -51,8 +51,17 @@ operWhole c xs
 	| c == "sum" = [sum xs]
 	| c == "prod" = [product xs]
 	| c == "geom" = [gMean xs]
-	| c == "harm" = [hMean xs]	
+	| c == "harm" = [hMean xs]
+	| c == "var" = [variance xs]
+	| c == "dev" = [stDev xs]
 
+variance :: Stack -> Double
+variance xs = (sum (map (\x -> (x - u)**2) xs))/(fromIntegral ((length xs)-1)) 
+ where u = (mean xs)
+ 
+stDev :: Stack -> Double
+stDev xs = sqrt (variance xs)
+	
 ehTriangulo :: Double -> Double -> Double -> Bool
 ehTriangulo x y z
  | c - (a - b) <= 0 = False
@@ -138,7 +147,9 @@ typeHelp xs = do
 		\  prod         Produtório. Consome toda a pilha. \n\
 		\  mean         Média Aritmética. Consome toda a pilha. \n\
 		\  geom         Média Geométrica. Consome toda a pilha. \n\
-		\  harm         Média Harmônica. Consome toda a pilha. \n\n\
+		\  harm         Média Harmônica. Consome toda a pilha. \n\
+		\  var          Variância amostral. Consome toda a pilha. \n\
+		\  dev          Desvio padrão amostral. Consome toda a pilha. \n\n\
 		\Quando quiser sair do guia de ajuda digite Enter."
 	putStrLn(help)
 	resposta <- getLine
@@ -147,7 +158,7 @@ typeHelp xs = do
 
 unOps = ["ln", "exp", "sqrt", "sin", "cos", "tan", "!", "esfera"]
 binOps = ["+","-","*","/","^", "root", "cilindro", "swap", "comb", "arr"]
-wholeOps = ["mean", "sum", "prod", "geom", "harm"]
+wholeOps = ["mean", "sum", "prod", "geom", "harm", "var", "dev"]
 terOps = ["raizes", "heron"]
 
 operInv = "Operacao invalida, tente \"help\" para ver as funcoes disponiveis. Pressione Enter para continuar"
