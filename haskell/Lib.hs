@@ -23,6 +23,8 @@ opBin c (x:y:xs)
  | c == "swap" = y:x:xs
  | c == "comb" = (comb y x):xs
  | c == "arr" = (arr y x):xs
+ | c == "polares" = (polares x y) ++ xs
+ | c == "cartesianas" = (cartesianas x y) ++ xs
 
 opUn :: String -> Stack -> Stack
 opUn _ [] = []
@@ -55,6 +57,21 @@ operWhole c xs
 	| c == "var" = [variance xs]
 	| c == "dev" = [stDev xs]
 
+polares :: Double -> Double -> [Double]
+polares x y = [(atan2 x y), sqrt(x**2+y**2)]
+
+cartesianas :: Double -> Double -> [Double]
+cartesianas y x = [x*(sin y), x*(cos y)]
+{-
+atan2 :: Double -> Double -> Double
+atan2 x y
+ | (x == 0) && (y == 0) = 0
+ | (x > 0) = atan (y/x)
+ | (x < 0) && (y >= 0) = atan (y/x) + pi
+ | (x < 0) && (y < 0) = atan (y/x) - pi
+ | (x == 0) && (y > 0) = pi/2
+ | (x == 0) && (y < 0) = (-pi)/2
+	-}
 variance :: Stack -> Double
 variance xs = (sum (map (\x -> (x - u)**2) xs))/(fromIntegral ((length xs)-1)) 
  where u = (mean xs)
@@ -127,6 +144,8 @@ typeHelp xs = do
 		\  + - * /      Soma, subtração, multiplicação e divisão. Requer dois números da pilha.\n\
 		\  ^            Exponenciação x^y. Requer dois números da pilha. \n\
 		\  root         Exponenciação x^(1/y). Requer dois números da pilha.\n\
+		\  polares		Converte coordenadas cartesianas para polares. Requer dois números da pilha.\n\
+		\  cartesianas  Converte coordenadas polares para cartesianas. Requer dois números da pilha.\n\
 		\  cilindro     Volume de um cilindro dado o raio e altura. Requer dois números da pilha.\n\
 		\  comb         Número de combinações simples. Requer dois números da pilha.\n\
 		\  arr          Número de arranjos simples. Requer dois números da pilha.\n\
@@ -157,7 +176,7 @@ typeHelp xs = do
 	calc xs
 
 unOps = ["ln", "exp", "sqrt", "sin", "cos", "tan", "!", "esfera"]
-binOps = ["+","-","*","/","^", "root", "cilindro", "swap", "comb", "arr"]
+binOps = ["+","-","*","/","^", "root", "cilindro", "swap", "comb", "arr", "polares", "cartesianas"]
 wholeOps = ["mean", "sum", "prod", "geom", "harm", "var", "dev"]
 terOps = ["raizes", "heron"]
 
