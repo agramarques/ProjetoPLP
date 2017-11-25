@@ -35,6 +35,13 @@ opUn c (x:xs)
  | c == "esfera" = (3.14*4*(x**3))/3: xs
  | c == "!" = fatAux x : xs  
  
+opTer :: String -> Stack -> Stack
+opTer _ [] = []
+opTer _ [x] = [x]
+opTer _ (x:y:[]) = (x:y:[])
+opTer c (x:y:z:xs)
+ | c == "raizes" = (raizes z y x) ++ xs
+ 
 operWhole :: String -> Stack -> Stack
 operWhole _ [] = []
 operWhole c xs
@@ -44,6 +51,13 @@ operWhole c xs
 	| c == "geom" = [gMean xs]
 	| c == "harm" = [hMean xs]	
 
+raizes :: Double -> Double -> Double -> [Double]
+raizes a b c
+ | delta < 0 = [c,b,a]		--aqui optei por deixar a pilha inalterada se nao houver raizes reais, dessa forma cai no aviso de operacao invalida
+ | delta == 0 = [(-b)/(2*a)]
+ | otherwise = [((-b)+(sqrt delta))/(2*a) , ((-b)-(sqrt delta))/(2*a)]
+ where delta = (b**2 - 4*a*c)
+	
 mean :: Stack -> Double
 mean xs = (sum xs)/(fromIntegral (length xs))	
 
@@ -91,6 +105,7 @@ typeHelp xs = do
 		\  cilindro     Volume de um cilindro dado o raio e altura. Requer dois números da pilha.\n\
 		\  comb         Número de combinações simples. Requer dois números da pilha.\n\
 		\  arr          Número de arranjos simples. Requer dois números da pilha.\n\
+		\  raizes       Calcula as raizes reais de uma equação quadrática. Requer três números da pilha. \n\
 		\  ln           Logaritmo natural. Requer um número da pilha.\n\
 		\  exp          Exponenciação de Euler e^x. Requer um número da pilha.\n\
 		\  sqrt         Raiz quadrada. Requer um número da pilha.\n\
@@ -116,7 +131,7 @@ typeHelp xs = do
 unOps = ["ln", "exp", "sqrt", "sin", "cos", "tan", "!", "esfera"]
 binOps = ["+","-","*","/","^", "root", "cilindro", "swap", "comb", "arr"]
 wholeOps = ["mean", "sum", "prod", "geom", "harm"]
-opList = unOps ++ binOps ++ wholeOps
+terOps = ["raizes"]
 
 operInv = "Operacao invalida, tente \"help\" para ver as funcoes disponiveis. Pressione Enter para continuar"
 
@@ -128,6 +143,7 @@ oper c x
  | isNumber c = (read c::Double) : x
  | c `elem` binOps = opBin c x
  | c `elem` unOps = opUn c x
+ | c `elem` terOps = opTer c x
  | c `elem` wholeOps = operWhole c x
  | otherwise = x
 
