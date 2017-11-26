@@ -59,7 +59,7 @@ operWhole c xs
 
 infixl 1 ?
 (?) :: Bool -> a -> a -> a
-(?) True  x _ = x
+(?) True x _ = x
 (?) False _ y = y
 
 
