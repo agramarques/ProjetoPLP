@@ -144,7 +144,7 @@ typeHelp xs = do
 		\  + - * /      Soma, subtração, multiplicação e divisão. Requer dois números da pilha.\n\
 		\  ^            Exponenciação x^y. Requer dois números da pilha. \n\
 		\  root         Exponenciação x^(1/y). Requer dois números da pilha.\n\
-		\  polares		Converte coordenadas cartesianas para polares. Requer dois números da pilha.\n\
+		\  polares      Converte coordenadas cartesianas para polares. Requer dois números da pilha.\n\
 		\  cartesianas  Converte coordenadas polares para cartesianas. Requer dois números da pilha.\n\
 		\  cilindro     Volume de um cilindro dado o raio e altura. Requer dois números da pilha.\n\
 		\  comb         Número de combinações simples. Requer dois números da pilha.\n\
