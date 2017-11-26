@@ -4,6 +4,7 @@ module Lib
     ) where
 
 import System.Process
+import System.Info
 import Data.Char (toLower)
 import Data.List (sort)
 
@@ -194,8 +195,10 @@ oper c x
 
 calc :: Stack -> IO()
 calc xs = do
-    system "clear" >> mapM_ print (reverse xs) -- comando limpeza terminal OSX
-    -- system "cls" >> mapM_ print (reverse xs) -- comando limpeza console Windows
+    -- limpa a tela do console (seja o OS um unix ou um windows)
+    if os == "mingw32" then system "cls" >> mapM_ print (reverse xs)
+    else system "clear" >> mapM_ print (reverse xs)
+
     comando <- getLine
     let comm = map toLower comando in
         comm == "quit" ? return() $
