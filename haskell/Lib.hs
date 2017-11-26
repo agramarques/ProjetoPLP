@@ -10,6 +10,7 @@ import Data.List (sort)
 
 type Stack = [Double]
 
+
 opBin :: String -> Stack -> Stack
 opBin _ [] = [] --talvez lançar um erro, se for na GUI ver como dar um aviso
 opBin _ [x] = [x] --nao opera sobre apenas um operando
@@ -27,6 +28,7 @@ opBin c (x:y:xs)
     | c == "polares" = (polares x y) ++ xs
     | c == "cartesianas" = (cartesianas x y) ++ xs
 
+
 opUn :: String -> Stack -> Stack
 opUn _ [] = []
 opUn c (x:xs)
@@ -39,6 +41,7 @@ opUn c (x:xs)
     | c == "esfera" = (3.14*4*(x**3))/3: xs
     | c == "!" = fatAux x : xs
 
+
 opTer :: String -> Stack -> Stack
 opTer _ [] = []
 opTer _ [x] = [x]
@@ -46,6 +49,7 @@ opTer _ (x:y:[]) = (x:y:[])
 opTer c (x:y:z:xs)
     | c == "raizes" = (raizes z y x) ++ xs
     | c == "heron" = (heron x y z) ++ xs
+
 
 operWhole :: String -> Stack -> Stack
 operWhole _ [] = []
@@ -58,11 +62,15 @@ operWhole c xs
     | c == "var" = [variance xs]
     | c == "dev" = [stDev xs]
 
+
 polares :: Double -> Double -> [Double]
 polares x y = [(atan2 x y), sqrt(x**2+y**2)]
 
+
 cartesianas :: Double -> Double -> [Double]
 cartesianas y x = [x*(sin y), x*(cos y)]
+
+
 {-
 atan2 :: Double -> Double -> Double
 atan2 x y
@@ -72,13 +80,17 @@ atan2 x y
     | (x < 0) && (y < 0) = atan (y/x) - pi
     | (x == 0) && (y > 0) = pi/2
     | (x == 0) && (y < 0) = (-pi)/2
-	-}
+-}
+
+
 variance :: Stack -> Double
 variance xs = (sum (map (\x -> (x - u)**2) xs))/(fromIntegral ((length xs)-1))
     where u = (mean xs)
 
+
 stDev :: Stack -> Double
 stDev xs = sqrt (variance xs)
+
 
 ehTriangulo :: Double -> Double -> Double -> Bool
 ehTriangulo x y z
@@ -86,11 +98,13 @@ ehTriangulo x y z
     | otherwise = True
     where [c, b, a] = sort [x, y, z]
 
+
 heron :: Double -> Double -> Double -> [Double]
 heron a b c
     | (ehTriangulo a b c) = [sqrt (s*(s-a)*(s-b)*(s-c))]
     | otherwise = [a, b, c]
     where s = (a+b+c)/2
+
 
 raizes :: Double -> Double -> Double -> [Double]
 raizes a b c
@@ -99,29 +113,37 @@ raizes a b c
     | otherwise = [((-b)+(sqrt delta))/(2*a) , ((-b)-(sqrt delta))/(2*a)]
     where delta = (b**2 - 4*a*c)
 
+
 mean :: Stack -> Double
 mean xs = (sum xs)/(fromIntegral (length xs))
+
 
 hMean :: Stack -> Double
 hMean xs = fromIntegral (length xs) / (sum $ map (1/) xs)
 
+
 gMean :: Stack -> Double
 gMean xs = (product xs)**(1/(fromIntegral(length xs)))
+
 
 comb :: Double -> Double -> Double
 comb a b = (fatAux a)/((fatAux b)*(fatAux (a-b)))
 
+
 arr :: Double -> Double -> Double
 arr a b = (fatAux a)/(fatAux (a-b))
 
+
 fatAux :: Double -> Double
 fatAux x = fromInteger $ fatorial (truncate x::Integer)
+
 
 fatorial :: Integer -> Integer
 fatorial x
     | x == 0 = 1
     | x < 0 = x*fatorial(x+1)
     | otherwise = x*fatorial(x-1)
+
 
 isNumber :: String -> Bool
 isNumber str =
@@ -132,10 +154,10 @@ isNumber str =
 if' :: Bool -> a -> a -> a
 if' True  x _ = x
 if' False _ y = y
-
 infixl 1 ?
 (?) :: Bool -> a -> a -> a
 (?) = if'
+
 
 typeHelp :: Stack -> IO()
 typeHelp xs = do
@@ -171,8 +193,8 @@ typeHelp xs = do
             \Quando quiser sair do guia de ajuda digite Enter."
     putStrLn(help)
     resposta <- getLine
-
     calc xs
+
 
 unOps = ["ln", "exp", "sqrt", "sin", "cos", "tan", "!", "esfera"]
 binOps = ["+","-","*","/","^", "root", "cilindro", "swap", "comb", "arr", "polares", "cartesianas"]
@@ -180,6 +202,7 @@ wholeOps = ["mean", "sum", "prod", "geom", "harm", "var", "dev"]
 terOps = ["raizes", "heron"]
 
 operInv = "Operacao invalida, tente \"help\" para ver as funcoes disponiveis. Pressione Enter para continuar"
+
 
 {- opção para caso use uma caixa de entrada a parte para ir entrando com cada comando
 recebe o comando como uma string, para decidir que operação realizar e a pilha, retornando
@@ -193,9 +216,10 @@ oper c x
     | c `elem` wholeOps = operWhole c x
     | otherwise = x
 
+
 calc :: Stack -> IO()
 calc xs = do
-    -- limpa a tela do console (seja o OS um unix ou um windows)
+    -- limpa a tela do console (seja o OS um windows ou um unix)
     if os == "mingw32" then system "cls" >> mapM_ print (reverse xs)
     else system "clear" >> mapM_ print (reverse xs)
 
