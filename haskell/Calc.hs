@@ -57,12 +57,10 @@ operWhole c xs
     | c == "dev" = [stDev xs]
 
 
-if' :: Bool -> a -> a -> a
-if' True  x _ = x
-if' False _ y = y
 infixl 1 ?
 (?) :: Bool -> a -> a -> a
-(?) = if'
+(?) True  x _ = x
+(?) False _ y = y
 
 
 typeHelp :: Stack -> IO()
