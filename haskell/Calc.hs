@@ -44,6 +44,9 @@ opUn c (x:xs)
     | c == "esfera" = (3.14*4*(x**3))/3: xs
     | c == "!" = fatAux x : xs
 
+operConst :: String -> Stack -> Stack
+operConst "pi" xs = (pi):xs
+operConst "e" xs = (exp 1):xs 
 
 opTer :: String -> Stack -> Stack
 opTer _ [] = []
@@ -122,6 +125,7 @@ typeHelp xs = do
     calc xs
 
 
+zeroOps = ["pi", "e"]
 unOps = ["ln", "log", "log2", "exp", "exp2", "exp10", "sqrt", "square", "inv", "sin", "cos", "tan", "asin", "acos", "atan", "!", "esfera"]
 binOps = ["+","-","*","/","^", "root", "cilindro", "swap", "comb", "arr", "polares", "cartesianas"]
 wholeOps = ["mean", "sum", "prod", "geom", "harm", "var", "dev", "moda", "mediana"]
@@ -140,6 +144,7 @@ oper c x
     | c `elem` unOps = opUn c x
     | c `elem` terOps = opTer c x
     | c `elem` wholeOps = operWhole c x
+	| c `elem` zeroOps = operConst c x
     | otherwise = x
 
 
