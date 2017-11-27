@@ -10,6 +10,7 @@ module Lib
     , mean
     , hMean
     , gMean
+	, moda
     , comb
     , arr
     , fatAux
@@ -17,8 +18,8 @@ module Lib
     , isNumber
     ) where
 
-import Data.List (sort)
-
+import Data.List
+import Data.Function (on)
 
 type Stack = [Double]
 
@@ -73,6 +74,8 @@ hMean xs = fromIntegral (length xs) / (sum $ map (1/) xs)
 gMean :: Stack -> Double
 gMean xs = (product xs)**(1/(fromIntegral(length xs)))
 
+moda :: Stack -> Double
+moda xs = head $ last $ sortBy (compare `on` length) (group xs)
 
 comb :: Double -> Double -> Double
 comb a b = (fatAux a)/((fatAux b)*(fatAux (a-b)))
