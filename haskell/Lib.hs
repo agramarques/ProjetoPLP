@@ -31,18 +31,6 @@ cartesianas :: Double -> Double -> [Double]
 cartesianas y x = [x*(sin y), x*(cos y)]
 
 
-{-
-atan2 :: Double -> Double -> Double
-atan2 x y
-    | (x == 0) && (y == 0) = 0
-    | (x > 0) = atan (y/x)
-    | (x < 0) && (y >= 0) = atan (y/x) + pi
-    | (x < 0) && (y < 0) = atan (y/x) - pi
-    | (x == 0) && (y > 0) = pi/2
-    | (x == 0) && (y < 0) = (-pi)/2
--}
-
-
 variance :: Stack -> Double
 variance xs = (sum (map (\x -> (x - u)**2) xs))/(fromIntegral ((length xs)-1))
     where u = (mean xs)

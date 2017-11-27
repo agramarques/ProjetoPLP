@@ -121,6 +121,14 @@ oper c x
     | otherwise = x
 
 
+offerHelp :: Stack -> IO()
+offerHelp xs = do
+    putStrLn operInv
+    c <- getLine
+    if c == "help"
+        then typeHelp xs
+        else calc xs
+
 calc :: Stack -> IO()
 calc xs = do
     -- limpa a tela do console (seja o OS um windows ou um unix)
@@ -133,9 +141,10 @@ calc xs = do
         comm == "clear" ? calc [] $
         comm == "help" ? typeHelp (xs) $
         let y = (oper comm xs) in
-            y == xs ? ((putStrLn operInv) >> getLine >> (calc y)) $
-            calc y --quando o comando nao e reconhecido, oper retorna a lista inalterada, aqui checa isso para oferecer a ajuda
-
-
+            if y == xs
+			    then offerHelp xs
+				else calc y
+				
+				
 main :: IO ()
 main = calc []
