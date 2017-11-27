@@ -27,11 +27,20 @@ opUn :: String -> Stack -> Stack
 opUn _ [] = []
 opUn c (x:xs)
     | c == "ln" = log x : xs
+	| c == "log" = (logBase 10 x) : xs
+	| c == "log2" = (logBase 2 x) : xs
     | c == "exp" = exp x : xs
+	| c == "exp2" = (2**x) : xs
+	| c == "exp10" = (10**x) : xs
     | c == "sqrt" = sqrt x : xs
+	| c == "square" = (x**2) : xs
+	| c == "inv" = (1/x) : xs
     | c == "sin" = sin x : xs
     | c == "cos" = cos x : xs
     | c == "tan" = tan x : xs
+	| c == "asin" = asin x : xs
+	| c == "acos" = acos x : xs
+	| c == "atan" = atan x : xs
     | c == "esfera" = (3.14*4*(x**3))/3: xs
     | c == "!" = fatAux x : xs
 
@@ -100,7 +109,7 @@ typeHelp xs = do
     calc xs
 
 
-unOps = ["ln", "exp", "sqrt", "sin", "cos", "tan", "!", "esfera"]
+unOps = ["ln", "log", "log2", "exp", "exp2", "exp10", "sqrt", "square", "inv", "sin", "cos", "tan", "asin", "acos", "atan", "!", "esfera"]
 binOps = ["+","-","*","/","^", "root", "cilindro", "swap", "comb", "arr", "polares", "cartesianas"]
 wholeOps = ["mean", "sum", "prod", "geom", "harm", "var", "dev"]
 terOps = ["raizes", "heron"]
