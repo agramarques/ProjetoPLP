@@ -11,6 +11,7 @@ module Lib
     , hMean
     , gMean
 	, moda
+	, mediana
     , comb
     , arr
     , fatAux
@@ -76,6 +77,15 @@ gMean xs = (product xs)**(1/(fromIntegral(length xs)))
 
 moda :: Stack -> Double
 moda xs = head $ last $ sortBy (compare `on` length) (group xs)
+
+mediana :: Stack -> Double
+mediana xs
+	| even len = (sorted !! (middle) + sorted !!(middle - 1))/2
+	| otherwise = sorted !! (middle)
+	where
+		len = length xs
+		sorted = sort xs
+		middle = len `div` 2
 
 comb :: Double -> Double -> Double
 comb a b = (fatAux a)/((fatAux b)*(fatAux (a-b)))

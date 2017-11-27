@@ -65,6 +65,7 @@ operWhole c xs
     | c == "var" = [variance xs]
     | c == "dev" = [stDev xs]
 	| c == "moda" = [moda xs]
+	| c == "mediana" = [mediana xs]
 
 
 infixl 1 ?
@@ -112,6 +113,7 @@ typeHelp xs = do
             \  geom         Média Geométrica. Consome toda a pilha. \n\
             \  harm         Média Harmônica. Consome toda a pilha. \n\
 			\  moda         Moda da amostra. Consome toda a pilha. \n\
+			\  mediana      Mediana da amostra. Consome toda a pilha. \n\
             \  var          Variância amostral. Consome toda a pilha. \n\
             \  dev          Desvio padrão amostral. Consome toda a pilha. \n\n\
             \Quando quiser sair do guia de ajuda digite Enter."
@@ -122,7 +124,7 @@ typeHelp xs = do
 
 unOps = ["ln", "log", "log2", "exp", "exp2", "exp10", "sqrt", "square", "inv", "sin", "cos", "tan", "asin", "acos", "atan", "!", "esfera"]
 binOps = ["+","-","*","/","^", "root", "cilindro", "swap", "comb", "arr", "polares", "cartesianas"]
-wholeOps = ["mean", "sum", "prod", "geom", "harm", "var", "dev", "moda"]
+wholeOps = ["mean", "sum", "prod", "geom", "harm", "var", "dev", "moda", "mediana"]
 terOps = ["raizes", "heron"]
 
 operInv = "Operacao invalida, tente \"help\" para ver as funcoes disponiveis. Pressione Enter para continuar"
