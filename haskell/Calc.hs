@@ -86,11 +86,20 @@ typeHelp xs = do
             \  raizes       Calcula as raizes reais de uma equação quadrática. Requer três números da pilha. \n\
             \  heron        Calcula a área de um triângulo. Requer três números da pilha. \n\
             \  ln           Logaritmo natural. Requer um número da pilha.\n\
+			\  log          Logaritmo base 10. Requer um número da pilha.\n\
+			\  log2         Logaritmo base 2. Requer um número da pilha.\n\
             \  exp          Exponenciação de Euler e^x. Requer um número da pilha.\n\
+			\  exp10        Potência de 10 (10^x). Requer um número da pilha.\n\
+			\  exp2         Potência de 2 (2^x). Requer um número da pilha.\n\
             \  sqrt         Raiz quadrada. Requer um número da pilha.\n\
+			\  square       Eleva ao quadrado. Requer um número da pilha.\n\
+			\  inv          Inverso multiplicativo (1/x). Requer um número da pilha.\n\
             \  sin          Seno de um ângulo. Requer um número da pilha.\n\
+			\  asin         Arco-seno de um ângulo. Requer um número da pilha.\n\
             \  cos          Cosseno de um ângulo. Requer um número da pilha.\n\
+			\  acos         Arco-cosseno de um ângulo. Requer um número da pilha.\n\
             \  tan          Tangente de um ângulo. Requer um número da pilha.\n\
+			\  atan         Arco-tangente de um ângulo. Requer um número da pilha.\n\
             \  esfera       Volume da esfera dado o raio. Requer um número da pilha.\n\
             \  !            Fatorial. Requer um número da pilha. \n\
             \  swap         Faz a troca dos dois últimos números da pilha. \n\
