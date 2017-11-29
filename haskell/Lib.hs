@@ -76,7 +76,8 @@ gMean :: Stack -> Double
 gMean xs = (product xs)**(1/(fromIntegral(length xs)))
 
 moda :: Stack -> Double
-moda xs = head $ last $ sortBy (compare `on` length) (group xs)
+--moda xs = head $ last $ sortBy (compare `on` length) (group (sort xs))
+moda xs = head $ last $ sortOn length (group (sort xs))
 
 mediana :: Stack -> Double
 mediana xs
