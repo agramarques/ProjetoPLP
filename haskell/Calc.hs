@@ -27,26 +27,28 @@ opUn :: String -> Stack -> Stack
 opUn _ [] = []
 opUn c (x:xs)
     | c == "ln" = log x : xs
-	| c == "log" = (logBase 10 x) : xs
-	| c == "log2" = (logBase 2 x) : xs
+    | c == "log" = (logBase 10 x) : xs
+    | c == "log2" = (logBase 2 x) : xs
     | c == "exp" = exp x : xs
-	| c == "exp2" = (2**x) : xs
-	| c == "exp10" = (10**x) : xs
+    | c == "exp2" = (2**x) : xs
+    | c == "exp10" = (10**x) : xs
     | c == "sqrt" = sqrt x : xs
-	| c == "square" = (x**2) : xs
-	| c == "inv" = (1/x) : xs
+    | c == "square" = (x**2) : xs
+    | c == "inv" = (1/x) : xs
     | c == "sin" = sin x : xs
     | c == "cos" = cos x : xs
     | c == "tan" = tan x : xs
-	| c == "asin" = asin x : xs
-	| c == "acos" = acos x : xs
-	| c == "atan" = atan x : xs
+    | c == "asin" = asin x : xs
+    | c == "acos" = acos x : xs
+    | c == "atan" = atan x : xs
     | c == "esfera" = (3.14*4*(x**3))/3: xs
     | c == "!" = fatAux x : xs
 
+
 operConst :: String -> Stack -> Stack
 operConst "pi" xs = (pi):xs
-operConst "e" xs = (exp 1):xs 
+operConst "e" xs = (exp 1):xs
+
 
 opTer :: String -> Stack -> Stack
 opTer _ [] = []
@@ -67,8 +69,8 @@ operWhole c xs
     | c == "harm" = [hMean xs]
     | c == "var" = [variance xs]
     | c == "dev" = [stDev xs]
-	| c == "moda" = [moda xs]
-	| c == "mediana" = [mediana xs]
+    | c == "moda" = [moda xs]
+    | c == "mediana" = [mediana xs]
 
 
 infixl 1 ?
@@ -91,20 +93,20 @@ typeHelp xs = do
             \  raizes       Calcula as raizes reais de uma equação quadrática. Requer três números da pilha. \n\
             \  heron        Calcula a área de um triângulo. Requer três números da pilha. \n\
             \  ln           Logaritmo natural. Requer um número da pilha.\n\
-			\  log          Logaritmo base 10. Requer um número da pilha.\n\
-			\  log2         Logaritmo base 2. Requer um número da pilha.\n\
+            \  log          Logaritmo base 10. Requer um número da pilha.\n\
+            \  log2         Logaritmo base 2. Requer um número da pilha.\n\
             \  exp          Exponenciação de Euler e^x. Requer um número da pilha.\n\
-			\  exp10        Potência de 10 (10^x). Requer um número da pilha.\n\
-			\  exp2         Potência de 2 (2^x). Requer um número da pilha.\n\
+            \  exp10        Potência de 10 (10^x). Requer um número da pilha.\n\
+            \  exp2         Potência de 2 (2^x). Requer um número da pilha.\n\
             \  sqrt         Raiz quadrada. Requer um número da pilha.\n\
-			\  square       Eleva ao quadrado. Requer um número da pilha.\n\
-			\  inv          Inverso multiplicativo (1/x). Requer um número da pilha.\n\
+            \  square       Eleva ao quadrado. Requer um número da pilha.\n\
+            \  inv          Inverso multiplicativo (1/x). Requer um número da pilha.\n\
             \  sin          Seno de um ângulo. Requer um número da pilha.\n\
-			\  asin         Arco-seno de um ângulo. Requer um número da pilha.\n\
+            \  asin         Arco-seno de um ângulo. Requer um número da pilha.\n\
             \  cos          Cosseno de um ângulo. Requer um número da pilha.\n\
-			\  acos         Arco-cosseno de um ângulo. Requer um número da pilha.\n\
+            \  acos         Arco-cosseno de um ângulo. Requer um número da pilha.\n\
             \  tan          Tangente de um ângulo. Requer um número da pilha.\n\
-			\  atan         Arco-tangente de um ângulo. Requer um número da pilha.\n\
+            \  atan         Arco-tangente de um ângulo. Requer um número da pilha.\n\
             \  esfera       Volume da esfera dado o raio. Requer um número da pilha.\n\
             \  !            Fatorial. Requer um número da pilha. \n\
             \  swap         Faz a troca dos dois últimos números da pilha. \n\
@@ -115,8 +117,8 @@ typeHelp xs = do
             \  mean         Média Aritmética. Consome toda a pilha. \n\
             \  geom         Média Geométrica. Consome toda a pilha. \n\
             \  harm         Média Harmônica. Consome toda a pilha. \n\
-			\  moda         Moda da amostra. Consome toda a pilha. \n\
-			\  mediana      Mediana da amostra. Consome toda a pilha. \n\
+            \  moda         Moda da amostra. Consome toda a pilha. \n\
+            \  mediana      Mediana da amostra. Consome toda a pilha. \n\
             \  var          Variância amostral. Consome toda a pilha. \n\
             \  dev          Desvio padrão amostral. Consome toda a pilha. \n\n\
             \Quando quiser sair do guia de ajuda digite Enter."
@@ -144,7 +146,7 @@ oper c x
     | c `elem` unOps = opUn c x
     | c `elem` terOps = opTer c x
     | c `elem` wholeOps = operWhole c x
-	| c `elem` zeroOps = operConst c x
+    | c `elem` zeroOps = operConst c x
     | otherwise = x
 
 
@@ -169,9 +171,9 @@ calc xs = do
         comm == "help" ? typeHelp (xs) $
         let y = (oper comm xs) in
             if y == xs
-			    then offerHelp xs
-				else calc y
-				
-				
+                then offerHelp xs
+                else calc y
+
+
 main :: IO ()
 main = calc []

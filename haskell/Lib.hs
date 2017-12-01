@@ -10,8 +10,8 @@ module Lib
     , mean
     , hMean
     , gMean
-	, moda
-	, mediana
+    , moda
+    , mediana
     , comb
     , arr
     , fatAux
@@ -81,12 +81,12 @@ moda xs = head $ last $ sortOn length (group (sort xs))
 
 mediana :: Stack -> Double
 mediana xs
-	| even len = (sorted !! (middle) + sorted !!(middle - 1))/2
-	| otherwise = sorted !! (middle)
-	where
-		len = length xs
-		sorted = sort xs
-		middle = len `div` 2
+    | even len = (sorted !! (middle) + sorted !!(middle - 1))/2
+    | otherwise = sorted !! (middle)
+    where
+        len = length xs
+        sorted = sort xs
+        middle = len `div` 2
 
 comb :: Double -> Double -> Double
 comb a b = (fatAux a)/((fatAux b)*(fatAux (a-b)))
