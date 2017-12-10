@@ -27,9 +27,32 @@ main = do
   table3 <- tableNew 4 2 True
   bPol <- buttonNewWithLabel "Coord Polares"
   bCart <- buttonNewWithLabel "Coord Cartes"
+  table1 <- tableNew 4 4 True
+  b1 <- buttonNewWithLabel "1"
+  b2 <- buttonNewWithLabel "2"
+  b3 <- buttonNewWithLabel "3"
+  b4 <- buttonNewWithLabel "4"
+  b5 <- buttonNewWithLabel "5"
+  b6 <- buttonNewWithLabel "6"
+  b7 <- buttonNewWithLabel "7"
+  b8 <- buttonNewWithLabel "8"
+  b9 <- buttonNewWithLabel "9"
+  b0 <- buttonNewWithLabel "0"
+  bPi <- buttonNewWithLabel "pi"
+  bDot <- buttonNewWithLabel "."
+  bMais <- buttonNewWithLabel "+"
+  bMenos <- buttonNewWithLabel "-"
+  bVezes <- buttonNewWithLabel "*"
+  bDiv <- buttonNewWithLabel "/"
+  table4 <- tableNew 6 2 True
+  bSum <- buttonNewWithLabel "Somatório"
+  bProd <- buttonNewWithLabel "Produtório"
+  lStat <- labelNew (Just "Saída Estatística")
+  outStat <- entryNew
     
   --posiciona e relaciona os componentes
-  set window [windowDefaultWidth := 200, windowDefaultHeight := 200,
+  set window [windowTitle := "Calc",
+              windowDefaultWidth := 200, windowDefaultHeight := 200,
               containerBorderWidth := 10, containerChild := box1]
   boxPackStart box1 box2 PackGrow 10
   boxPackStart box1 box3 PackGrow 10
@@ -53,6 +76,29 @@ main = do
   tableAttachDefaults table3 bCart 1 2 0 1
   tableSetRowSpacings table3 5
   tableSetColSpacings table3 5
+  boxPackStart box3 table1 PackGrow 10
+  tableAttachDefaults table1 b1 0 1 0 1
+  tableAttachDefaults table1 b2 1 2 0 1
+  tableAttachDefaults table1 b3 2 3 0 1
+  tableAttachDefaults table1 bMais 3 4 0 1
+  tableAttachDefaults table1 b4 0 1 1 2
+  tableAttachDefaults table1 b5 1 2 1 2
+  tableAttachDefaults table1 b6 2 3 1 2
+  tableAttachDefaults table1 bMenos 3 4 1 2
+  tableAttachDefaults table1 b7 0 1 2 3
+  tableAttachDefaults table1 b8 1 2 2 3
+  tableAttachDefaults table1 b9 2 3 2 3
+  tableAttachDefaults table1 bVezes 3 4 2 3
+  tableAttachDefaults table1 bPi 0 1 3 4
+  tableAttachDefaults table1 b0 1 2 3 4
+  tableAttachDefaults table1 bDot 2 3 3 4
+  tableAttachDefaults table1 bDiv 3 4 3 4
+  
+  boxPackStart box3 table4 PackGrow 10
+  tableAttachDefaults table4 bSum 0 1 0 1
+  tableAttachDefaults table4 lStat 1 2 0 1
+  tableAttachDefaults table4 bProd 0 1 1 2
+  tableAttachDefaults table4 outStat 1 2 1 2
     
   --associa as funcoes aos eventos
   onDestroy window mainQuit
