@@ -1,4 +1,5 @@
 import Graphics.UI.Gtk
+import CalcUI
 
 --funcoes de cada botao
 processStack :: (LabelClass o, TextViewClass t) => o -> t -> String -> IO()
@@ -7,7 +8,9 @@ processStack lab stack op = do
   bounds <- textBufferGetBounds buf
   raw <- textBufferGetText buf (fst bounds) (snd bounds) False :: IO String
   let parsed = map read (lines raw)::[Double]
-  print parsed
+  let result = oper op (reverse parsed)
+  let toShow = unlines (reverse $ map show result)
+  textBufferSetText buf toShow
   
 
 main :: IO ()
