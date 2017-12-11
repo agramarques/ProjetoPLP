@@ -177,6 +177,10 @@ main = do
   --associa as funcoes aos eventos
   onClicked bMais (processStack "+" stack)
   onClicked bMenos (processStack "-" stack)
+  onClicked bVezes (processStack "*" stack)
+  onClicked bDiv (processStack "/" stack)
+  onClicked bSwap (processStack "swap" stack)
+  onClicked bClear (processStack "clear" stack)
   onDestroy window mainQuit
   
   
