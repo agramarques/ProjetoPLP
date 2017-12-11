@@ -3,7 +3,12 @@ import Graphics.UI.Gtk
 --funcoes de cada botao
 processStack :: (LabelClass o, TextViewClass t) => o -> t -> String -> IO()
 processStack lab stack op = do
-  labelSetText lab op
+  buf <- textViewGetBuffer stack
+  bounds <- textBufferGetBounds buf
+  raw <- textBufferGetText buf (fst bounds) (snd bounds) False :: IO String
+  let parsed = map read (lines raw)::[Double]
+  print parsed
+  
 
 main :: IO ()
 main = do
