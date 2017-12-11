@@ -2,8 +2,8 @@ import Graphics.UI.Gtk
 import CalcUI
 
 --funcoes de cada botao
-processStack :: (LabelClass o, TextViewClass t) => o -> t -> String -> IO()
-processStack lab stack op = do
+processStack :: (TextViewClass t) => String -> t -> IO()
+processStack op stack = do
   buf <- textViewGetBuffer stack
   bounds <- textBufferGetBounds buf
   raw <- textBufferGetText buf (fst bounds) (snd bounds) False :: IO String
@@ -11,6 +11,7 @@ processStack lab stack op = do
   let result = oper op (reverse parsed)
   let toShow = unlines (reverse $ map show result)
   textBufferSetText buf toShow
+  widgetGrabFocus stack
   
 
 main :: IO ()
@@ -174,7 +175,8 @@ main = do
   tableAttachDefaults table4 bMedi 1 2 5 6
     
   --associa as funcoes aos eventos
-  onClicked bMais (processStack labelErros stack "+") --provisório, só pra visualizar
+  onClicked bMais (processStack "+" stack)
+  onClicked bMenos (processStack "-" stack)
   onDestroy window mainQuit
   
   
