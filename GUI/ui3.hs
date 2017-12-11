@@ -11,7 +11,7 @@ main = do
   box1 <- hBoxNew True 10
   box2 <- vBoxNew True 10
   box3 <- vBoxNew True 10
-  table5 <- tableNew 5 2 True
+  table5 <- tableNew 6 2 True
   scroll <- scrolledWindowNew Nothing Nothing
   stack <- textViewNew
   labelErros <- labelNew (Just "-") --é pra ser "", mas fica ruim de ver enquanto faz o design
@@ -89,10 +89,10 @@ main = do
   scrolledWindowSetPolicy scroll PolicyNever PolicyAutomatic
   set stack [textViewJustification := JustifyRight, textViewRightMargin := 1]
   containerAdd scroll stack
-  tableAttachDefaults table5 scroll 0 2 0 3
-  tableAttachDefaults table5 labelErros 0 2 3 4
-  tableAttachDefaults table5 bSwap 0 1 4 5
-  tableAttachDefaults table5 bClear 1 2 4 5
+  tableAttachDefaults table5 scroll 0 2 0 4
+  tableAttachDefaults table5 labelErros 0 2 4 5
+  tableAttachDefaults table5 bSwap 0 1 5 6
+  tableAttachDefaults table5 bClear 1 2 5 6
   
   boxPackStart box2 table2 PackGrow 10
   tableAttachDefaults table2 bSin 0 1 0 1
