@@ -200,7 +200,14 @@ main = do
   onClicked bE2 (processStack "exp2" stack)
   onClicked bE10 (processStack "exp10" stack)
   onClicked bComb (processStack "comb" stack)
-  onClicked bArr (processStack "arr" stack)
+  onClicked bPol (processStack "polares" stack)
+  onClicked bCart (processStack "cartesianas" stack)
+  onClicked bHip (processStack "hipotenusa" stack)
+  onClicked bHeron (processStack "heron" stack)
+  onClicked bRaizes (processStack "raizes" stack)
+  onClicked bCirc (processStack "circulo" stack)
+  onClicked bCil (processStack "cilindro" stack)
+  onClicked bEsf (processStack "esfera" stack)
   onDestroy window mainQuit
   
   

@@ -14,12 +14,13 @@ opBin c (x:y:xs)
     | c == "/" = (y/x):xs
     | c == "^" = (y**x) : xs
     | c == "root" = y**(1/x) : xs
-    | c == "cilindro" = 3.14*x*(y**2) : xs
+    | c == "cilindro" = (pi)*x*(y**2) : xs
     | c == "swap" = y:x:xs
     | c == "comb" = (comb y x):xs
     | c == "arr" = (arr y x):xs
     | c == "polares" = (polares x y) ++ xs
     | c == "cartesianas" = (cartesianas x y) ++ xs
+    | c == "hipotenusa" = [(polares x y)!!1]++xs
 
 
 opUn :: String -> Stack -> Stack
@@ -40,7 +41,8 @@ opUn c (x:xs)
     | c == "asin" = asin x : xs
     | c == "acos" = acos x : xs
     | c == "atan" = atan x : xs
-    | c == "esfera" = (3.14*4*(x**3))/3: xs
+    | c == "esfera" = ((pi)*4*(x**3))/3 : xs
+    | c == "circulo" = ((pi)*(x**2)) : xs
     | c == "!" = fatAux x : xs
 
 
@@ -80,8 +82,8 @@ infixl 1 ?
 
 
 zeroOps = ["pi", "e"]
-unOps = ["ln", "log", "log2", "exp", "exp2", "exp10", "sqrt", "square", "inv", "sin", "cos", "tan", "asin", "acos", "atan", "!", "esfera"]
-binOps = ["+","-","*","/","^", "root", "cilindro", "swap", "comb", "arr", "polares", "cartesianas"]
+unOps = ["ln", "log", "log2", "exp", "exp2", "exp10", "sqrt", "square", "inv", "sin", "cos", "tan", "asin", "acos", "atan", "!", "esfera", "circulo"]
+binOps = ["+","-","*","/","^", "root", "cilindro", "swap", "comb", "arr", "polares", "cartesianas", "hipotenusa"]
 wholeOps = ["mean", "sum", "prod", "geom", "harm", "var", "dev", "moda", "mediana", "clear"]
 terOps = ["raizes", "heron"]
 
