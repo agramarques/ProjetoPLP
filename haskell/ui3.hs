@@ -1,6 +1,9 @@
 import Graphics.UI.Gtk
 
 --funcoes de cada botao
+processStack :: (LabelClass o, TextViewClass t) => o -> t -> String -> IO()
+processStack lab stack op = do
+  labelSetText lab op
 
 main :: IO ()
 main = do
@@ -163,6 +166,7 @@ main = do
   tableAttachDefaults table4 bMedi 1 2 5 6
     
   --associa as funcoes aos eventos
+  onClicked bMais (processStack labelErros stack "+") --provisório, só pra visualizar
   onDestroy window mainQuit
   
   
