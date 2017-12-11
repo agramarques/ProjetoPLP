@@ -41,6 +41,12 @@ main = do
   table3 <- tableNew 4 2 True
   bPol <- buttonNewWithLabel "Coord Polares"
   bCart <- buttonNewWithLabel "Coord Cartes"
+  bHip <- buttonNewWithLabel "Hipotenusa"
+  bHeron <- buttonNewWithLabel "Area triang"
+  bRaizes <- buttonNewWithLabel "Raizes 2 grau"
+  bCirc <- buttonNewWithLabel "Area circulo"
+  bCil <- buttonNewWithLabel "Vol cilindro"
+  bEsf <- buttonNewWithLabel "Vol esfera"
   table1 <- tableNew 4 4 True
   b1 <- buttonNewWithLabel "1"
   b2 <- buttonNewWithLabel "2"
@@ -61,6 +67,14 @@ main = do
   table4 <- tableNew 6 2 True
   bSum <- buttonNewWithLabel "Somatório"
   bProd <- buttonNewWithLabel "Produtório"
+  bMedia <- buttonNewWithLabel "Média"
+  bGeom <- buttonNewWithLabel "Média Geom"
+  bHarm <- buttonNewWithLabel "Média Harm"
+  bVar <- buttonNewWithLabel "Variância"
+  bDev <- buttonNewWithLabel "Desvio padrão"
+  bModa <- buttonNewWithLabel "Moda"
+  bMedi <- buttonNewWithLabel "Mediana"
+  bSend <- buttonNewWithLabel "Enviar p/ pilha"
   lStat <- labelNew (Just "Saída Estatística")
   outStat <- entryNew
     
@@ -104,6 +118,12 @@ main = do
   boxPackStart box3 table3 PackGrow 10
   tableAttachDefaults table3 bPol 0 1 0 1
   tableAttachDefaults table3 bCart 1 2 0 1
+  tableAttachDefaults table3 bHip 0 1 1 2
+  tableAttachDefaults table3 bHeron 1 2 1 2
+  tableAttachDefaults table3 bRaizes 0 1 2 3
+  tableAttachDefaults table3 bCirc 1 2 2 3
+  tableAttachDefaults table3 bCil 0 1 3 4
+  tableAttachDefaults table3 bEsf 1 2 3 4
   tableSetRowSpacings table3 5
   tableSetColSpacings table3 5
 
@@ -130,6 +150,14 @@ main = do
   tableAttachDefaults table4 lStat 1 2 0 1
   tableAttachDefaults table4 bProd 0 1 1 2
   tableAttachDefaults table4 outStat 1 2 1 2
+  tableAttachDefaults table4 bMedia 0 1 2 3
+  tableAttachDefaults table4 bSend 1 2 2 3
+  tableAttachDefaults table4 bGeom 0 1 3 4
+  tableAttachDefaults table4 bVar 1 2 3 4
+  tableAttachDefaults table4 bHarm 0 1 4 5
+  tableAttachDefaults table4 bDev 1 2 4 5
+  tableAttachDefaults table4 bModa 0 1 5 6
+  tableAttachDefaults table4 bMedi 1 2 5 6
     
   --associa as funcoes aos eventos
   onDestroy window mainQuit
