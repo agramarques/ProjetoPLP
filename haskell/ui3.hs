@@ -12,8 +12,18 @@ processStack op stack = do
   let toShow = unlines (reverse $ map show result)
   textBufferSetText buf toShow
   widgetGrabFocus stack
-  
 
+statistical :: (TextViewClass t, EntryClass e) => String -> t -> e -> IO()
+statistical op stack out = do  
+  buf <- textViewGetBuffer stack
+  bounds <- textBufferGetBounds buf
+  raw <- textBufferGetText buf (fst bounds) (snd bounds) False :: IO String
+  let parsed = map read (lines raw)::[Double]
+  let result = head $ oper op (reverse parsed)
+  let toShow = show result
+  entrySetText out toShow
+  widgetGrabFocus stack
+  
 main :: IO ()
 main = do
   initGUI
@@ -208,6 +218,15 @@ main = do
   onClicked bCirc (processStack "circulo" stack)
   onClicked bCil (processStack "cilindro" stack)
   onClicked bEsf (processStack "esfera" stack)
+  onClicked bSum (statistical "sum" stack outStat)
+  onClicked bProd (statistical "prod" stack outStat)
+  onClicked bMedia (statistical "mean" stack outStat)
+  onClicked bGeom (statistical "geom" stack outStat)
+  onClicked bHarm (statistical "harm" stack outStat)
+  onClicked bVar (statistical "var" stack outStat)
+  onClicked bDev (statistical "dev" stack outStat)
+  onClicked bModa (statistical "moda" stack outStat)
+  onClicked bMedi (statistical "mediana" stack outStat)
   onDestroy window mainQuit
   
   
