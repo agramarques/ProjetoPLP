@@ -36,6 +36,12 @@ sendToStack entry stack = do
   textBufferSetText buf toShow
   widgetGrabFocus stack
 
+addToStack :: (TextViewClass t) => String -> t -> IO()
+addToStack value stack = do
+  buf <- textViewGetBuffer stack
+  textBufferInsertAtCursor buf value
+  widgetGrabFocus stack
+
 main :: IO ()
 main = do
   initGUI
@@ -240,6 +246,18 @@ main = do
   onClicked bModa (statistical "moda" stack outStat)
   onClicked bMedi (statistical "mediana" stack outStat)
   onClicked bSend (sendToStack outStat stack)
+  onClicked b1 (addToStack "1" stack)
+  onClicked b2 (addToStack "2" stack)
+  onClicked b3 (addToStack "3" stack)
+  onClicked b4 (addToStack "4" stack)
+  onClicked b5 (addToStack "5" stack)
+  onClicked b6 (addToStack "6" stack)
+  onClicked b7 (addToStack "7" stack)
+  onClicked b8 (addToStack "8" stack)
+  onClicked b9 (addToStack "9" stack)
+  onClicked b0 (addToStack "0" stack)
+  onClicked bDot (addToStack "." stack)
+  onClicked bPi (addToStack (show pi) stack)
   onDestroy window mainQuit
   
   
