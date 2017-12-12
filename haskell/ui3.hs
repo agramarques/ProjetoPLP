@@ -23,7 +23,19 @@ statistical op stack out = do
   let toShow = show result
   entrySetText out toShow
   widgetGrabFocus stack
-  
+
+sendToStack :: (TextViewClass t, EntryClass e) => e -> t -> IO()
+sendToStack entry stack = do
+  buf <- textViewGetBuffer stack
+  bounds <- textBufferGetBounds buf
+  raw <- textBufferGetText buf (fst bounds) (snd bounds) False :: IO String
+  let parsed = map read (lines raw)::[Double]
+  toAdd <- entryGetText entry
+  let result = oper toAdd (reverse parsed) --usa o fato que oper ja insere um numero passado como operacao na pilha
+  let toShow = unlines (reverse $ map show result)
+  textBufferSetText buf toShow
+  widgetGrabFocus stack
+
 main :: IO ()
 main = do
   initGUI
@@ -227,6 +239,7 @@ main = do
   onClicked bDev (statistical "dev" stack outStat)
   onClicked bModa (statistical "moda" stack outStat)
   onClicked bMedi (statistical "mediana" stack outStat)
+  onClicked bSend (sendToStack outStat stack)
   onDestroy window mainQuit
   
   
