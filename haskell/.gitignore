@@ -3,5 +3,7 @@
 !.gitignore
 !Calc.hs
 !Lib.hs
-!ui3.hs
+!CalcGUI.hs
 !CalcUI.hs
+!Calc
+!CalcGUI
