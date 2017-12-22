@@ -6,4 +6,5 @@ Para compilar
         ghc Calc.hs
 
     versão gráfica
-        ghc CalcGUI.hs (necessário pacote "libghc-gtk-dev")
+        ghc CalcGUI.hs
+        (necessário pacote "libghc-gtk-dev" para compilar, disponivel no repositorio do ubuntu)
