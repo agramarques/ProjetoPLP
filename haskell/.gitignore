@@ -1,10 +1,10 @@
 *
 
 !.gitignore
-!Calc.hs
 !Lib.hs
+!Calc.hs
+!CalcCLI.hs
 !CalcGUI.hs
-!CalcUI.hs
 !bin
 !bin/Calc
 !bin/CalcGUI
