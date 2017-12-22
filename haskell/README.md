@@ -3,7 +3,7 @@
 # Para compilar (pre-compilados em bin)
 
     versão de terminal
-        ghc Calc.hs
+        ghc CalcCLI.hs
 
     versão gráfica
         ghc CalcGUI.hs

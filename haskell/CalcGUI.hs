@@ -1,5 +1,5 @@
 import Graphics.UI.Gtk
-import CalcUI
+import Calc
 
 --funcoes de cada botao
 processStack :: (TextViewClass t) => String -> t -> IO()
@@ -14,7 +14,7 @@ processStack op stack = do
   widgetGrabFocus stack
 
 statistical :: (TextViewClass t, EntryClass e) => String -> t -> e -> IO()
-statistical op stack out = do  
+statistical op stack out = do
   buf <- textViewGetBuffer stack
   bounds <- textBufferGetBounds buf
   raw <- textBufferGetText buf (fst bounds) (snd bounds) False :: IO String
@@ -45,7 +45,7 @@ addToStack value stack = do
 main :: IO ()
 main = do
   initGUI
-  
+
   --cria componentes
   window <- windowNew
   box1 <- hBoxNew True 10
@@ -117,14 +117,14 @@ main = do
   bSend <- buttonNewWithLabel "Enviar p/ pilha"
   lStat <- labelNew (Just "Saída Estatística")
   outStat <- entryNew
-    
+
   --posiciona e relaciona os componentes
   set window [windowTitle := "Calc",
               windowDefaultWidth := 200, windowDefaultHeight := 200,
               containerBorderWidth := 10, containerChild := box1]
   boxPackStart box1 box2 PackGrow 10
   boxPackStart box1 box3 PackGrow 10
-  
+
   boxPackStart box2 table5 PackGrow 10
   scrolledWindowSetPolicy scroll PolicyNever PolicyAutomatic
   set stack [textViewJustification := JustifyRight, textViewRightMargin := 1]
@@ -133,7 +133,7 @@ main = do
   tableAttachDefaults table5 labelErros 0 2 4 5
   tableAttachDefaults table5 bSwap 0 1 5 6
   tableAttachDefaults table5 bClear 1 2 5 6
-  
+
   boxPackStart box2 table2 PackGrow 10
   tableAttachDefaults table2 bSin 0 1 0 1
   tableAttachDefaults table2 bCos 1 2 0 1
@@ -201,7 +201,7 @@ main = do
   tableAttachDefaults table4 bDev 1 2 4 5
   tableAttachDefaults table4 bModa 0 1 5 6
   tableAttachDefaults table4 bMedi 1 2 5 6
-    
+
   --associa as funcoes aos eventos
   onClicked bMais (processStack "+" stack)
   onClicked bMenos (processStack "-" stack)
@@ -259,7 +259,7 @@ main = do
   onClicked bDot (addToStack "." stack)
   onClicked bPi (addToStack (show pi) stack)
   onDestroy window mainQuit
-  
-  
+
+
   widgetShowAll window
   mainGUI
