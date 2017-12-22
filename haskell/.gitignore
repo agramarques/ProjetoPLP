@@ -6,6 +6,6 @@
 !CalcCLI.hs
 !CalcGUI.hs
 !bin
-!bin/Calc
+!bin/CalcCLI
 !bin/CalcGUI
 !README.md
