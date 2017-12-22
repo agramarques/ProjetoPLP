@@ -17,10 +17,13 @@ module Lib
     , fatAux
     , fatorial
     , isNumber
+    , mmcAux
+    , mmc
     ) where
 
 import Data.List
 import Data.Function (on)
+import Data.List.Split.Internals
 
 type Stack = [Double]
 
@@ -106,6 +109,17 @@ fatorial x
     | x < 0 = x*fatorial(x+1)
     | otherwise = x*fatorial(x-1)
 
+mmcAux :: Stack -> Double
+mmcAux x = fromInteger $ (mmc [(truncate xs::Integer) | xs <- x] !! 0) -- mmc retorna uma lista com 1 elemento na resposta
+
+mmc :: [Integer] -> [Integer]
+mmc x
+	| length x == 1 = x
+	| mod (length x)  2 == 0 = mmc (geraMMC x)
+	| otherwise = mmc (geraMMC (x ++ [1]))
+
+geraMMC :: [Integer] -> [Integer]
+geraMMC x = map (\[x, y] -> lcm x y) . chunksOf 2 $ x
 
 isNumber :: String -> Bool
 isNumber str =

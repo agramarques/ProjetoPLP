@@ -74,6 +74,7 @@ operWhole c xs
     | c == "dev" = [stDev xs]
     | c == "moda" = [moda xs]
     | c == "mediana" = [mediana xs]
+    | c == "mmc" = [mmcAux xs]
     | c == "clear" = []
 
 
@@ -86,7 +87,7 @@ infixl 1 ?
 zeroOps = ["pi", "e"]
 unOps = ["ln", "log", "log2", "exp", "exp2", "exp10", "sqrt", "square", "inv", "sin", "cos", "tan", "asin", "acos", "atan", "!", "esfera", "circulo"]
 binOps = ["+","-","*","/","^", "root", "cilindro", "swap", "comb", "arr", "polares", "cartesianas", "hipotenusa"]
-wholeOps = ["mean", "sum", "prod", "geom", "harm", "var", "dev", "moda", "mediana", "clear"]
+wholeOps = ["mean", "sum", "prod", "geom", "harm", "var", "dev", "moda", "mediana", "mmc", "clear"]
 terOps = ["raizes", "heron"]
 
 
