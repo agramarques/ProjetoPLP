@@ -1,6 +1,6 @@
 # Parte haskell do projeto
 
-Para compilar
+# Para compilar (pre-compilados em bin)
 
     versão de terminal
         ghc Calc.hs
