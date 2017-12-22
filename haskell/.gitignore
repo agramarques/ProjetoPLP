@@ -5,6 +5,7 @@
 !Lib.hs
 !CalcGUI.hs
 !CalcUI.hs
+!bin
 !bin/Calc
 !bin/CalcGUI
 !README.md
