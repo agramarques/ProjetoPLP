@@ -48,6 +48,7 @@ typeHelp xs = do
             \  mediana      Mediana da amostra. Consome toda a pilha. \n\
             \  var          Variância amostral. Consome toda a pilha. \n\
             \  dev          Desvio padrão amostral. Consome toda a pilha. \n\
+            \  mdc          Máximo Divisor Comum. Consome toda a pilha.\n\
             \  mmc          Minimo Múltiplo Comum. Consome toda a pilha.\n\n\
             \Quando quiser sair do guia de ajuda digite Enter."
     putStrLn(help)

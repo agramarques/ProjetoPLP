@@ -115,6 +115,7 @@ main = do
   bModa <- buttonNewWithLabel "Moda"
   bMedi <- buttonNewWithLabel "Mediana"
   bMMC <- buttonNewWithLabel "MMC"
+  bMDC <- buttonNewWithLabel "MDC"
   bSend <- buttonNewWithLabel "Enviar p/ pilha"
   lStat <- labelNew (Just "Saída Estatística")
   outStat <- entryNew
@@ -190,7 +191,7 @@ main = do
   tableAttachDefaults table1 bDiv 3 4 3 4
 
   boxPackStart box3 table4 PackGrow 10
-  tableAttachDefaults table4 bSum 1 2 6 7 -- posicao 0 1 0 1 livre
+  tableAttachDefaults table4 bSum 0 1 0 1
   tableAttachDefaults table4 lStat 1 2 0 1
   tableAttachDefaults table4 bProd 0 1 1 2
   tableAttachDefaults table4 outStat 1 2 1 2
@@ -203,6 +204,7 @@ main = do
   tableAttachDefaults table4 bModa 0 1 5 6
   tableAttachDefaults table4 bMedi 1 2 5 6
   tableAttachDefaults table4 bMMC 0 1 6 7
+  tableAttachDefaults table4 bMDC 1 2 6 7
 
   --associa as funcoes aos eventos
   onClicked bMais (processStack "+" stack)
@@ -248,6 +250,7 @@ main = do
   onClicked bModa (statistical "moda" stack outStat)
   onClicked bMedi (statistical "mediana" stack outStat)
   onClicked bMMC (statistical "mmc" stack outStat)
+  onClicked bMDC (statistical "mdc" stack outStat)
   onClicked bSend (sendToStack outStat stack)
   onClicked b1 (addToStack "1" stack)
   onClicked b2 (addToStack "2" stack)
