@@ -2,7 +2,7 @@
 :- initialization main.
 
 
-help() :-
+help :-
     writeln('Comandos disponíveis:'),
     writeln('+ - * /      Soma, subtração, multiplicação e divisão. Requer dois números da pilha.'),
     writeln('^            Exponenciação x^y. Requer dois números da pilha.'),
