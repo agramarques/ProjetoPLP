@@ -113,11 +113,19 @@ mode(X, R) :-
 % Lógica necessária para construção de gráficos.
 
 identidade(X, A, B, Resposta) :- Resposta is (A * X) + B.
+
 quadratica(X, A, B, C, Resposta) :- Resposta is (A * (X ^ 2)) + (B*X) + C.
+
 cosseno(X, A, B, C, Resposta) :- Angulo is B * X + C, Resposta is A * cos(Angulo).
+
 seno(X, A, B, C, Resposta) :- Angulo is B * X + C, Resposta is A * sin(Angulo).
+
 logn(X, A, B, C, Resposta) :- Term is (B * X) + C, writeln(Term), Resposta is A * log(Term).
+
 euler(X, A, B, C, Resposta) :- Term is (B * X) + C, Resposta is A * exp(Term).
+
 exponenciacao_xa(X, A, Resposta) :- Resposta is X ^ A.
+
 a_sobre_xb(X, A, B, Resposta) :- Resposta is A / (X + B).
+
 exponenciacao_ax(X, A, Resposta) :- Resposta is A ^ X.
