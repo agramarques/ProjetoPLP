@@ -1,4 +1,6 @@
 :- [calc].
+:- dynamic dialog/2.
+:- [graphicsGUI].
 :- initialization main.
 
 
@@ -26,6 +28,8 @@ dialog(calcGUI,
 	       button('   Vol Esfera   '),
 	     Coord_Cartes    :=
 	       button(' Coord Cartes '),
+       Grafico    :=
+         button(' Graficos '),
 	     Swap            :=
 	       button(swap),
 	     Clear           :=
@@ -157,6 +161,8 @@ dialog(calcGUI,
 		  area(360, 115, 120, 25)),
 	     area(Coord_Cartes,
 		  area(360, 10, 120, 25)),
+      area(Grafico,
+     area(490, 50, 120, 25)),
 	     area(Swap,
 		  area(15, 211, 50, 25)),
 	     area(Clear,
@@ -466,6 +472,10 @@ dialog(calcGUI,
 				    Editor?text_buffer,
 				    Stat_output, 'dev')
 	       ],
+       Grafico :=
+          [ message := message(@prolog,
+             grafico)
+          ],
 	     Mediana         :=
 	       [ message := message(@prolog,
 				    stat,
@@ -516,5 +526,3 @@ op(Stack, Com) :-
 main() :-
     make_dialog(D, calcGUI),
     send(D, open).
-
-

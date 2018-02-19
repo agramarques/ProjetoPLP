@@ -72,3 +72,15 @@ oper(C, X, R) :- isUn(C), opUn(C, X, R), !.
 oper(C, X, R) :- isBin(C), opBin(C, X, R), !.
 oper(C, X, R) :- isTer(C), opTer(C, X, R), !.
 oper(C, X, R) :- isWhole(C), opWhole(C, X, R), !.
+
+
+graphic_option(OPTION, X, A, B, C, R) :-
+                                      ((OPTION = 'identidade', identidade(X, A, B, R1));
+                                      (OPTION = 'quadratica', quadratica(X, A, B, C, R1));
+                                      (OPTION = 'cos', cosseno(X, A, B, C, R1));
+                                      (OPTION = 'sen', seno(X, A, B, C, R1));
+                                      (OPTION = 'logn', logn(X, A, B, C, R1));
+                                      (OPTION = 'euler', euler(X, A, B, C, R1));
+                                      (OPTION = 'xa', exponenciacao_xa(X, A, R1));
+                                      (OPTION = 'axb', a_sobre_xb(X, A, B, R1));
+                                      (OPTION = 'ax', exponenciacao_ax(X, A, R1))) , R is R1.

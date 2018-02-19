@@ -2,7 +2,7 @@
 :- initialization main.
 
 
-help :-
+helper :-
     writeln('Comandos disponíveis:'),
     writeln('+ - * /      Soma, subtração, multiplicação e divisão. Requer dois números da pilha.'),
     writeln('^            Exponenciação x^y. Requer dois números da pilha.'),
@@ -56,11 +56,11 @@ main(Stack) :-
     read_line_to_codes(user_input, Input),
     string_to_atom(Input, I),
 
-    (\+(I = 'clear') ; main([])),
-    (\+(I = 'stack') ; writeln(Stack), main(Stack)),
-    (\+(I = 'quit') ; halt(0)),
-    (\+(I = 'help') ; help(), main(Stack)),
+    ((I \= clear) ; main([])),
+    ((I \= stack) ; writeln(Stack), main(Stack)),
+    ((I \= help) ; (helper, main(Stack))),
+    ((I \= quit) ; halt(0)),
 
-    (  atom_number(I, N) 
+    (  atom_number(I, N)
     -> main([N|Stack])
     ;  oper(I, Stack, [R|Rs]), writeln(R), main([R|Rs])).
