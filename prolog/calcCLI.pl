@@ -58,8 +58,8 @@ main(Stack) :-
 
     ((I \= clear) ; main([])),
     ((I \= stack) ; writeln(Stack), main(Stack)),
-    ((I \= help) ; (helper, main(Stack))),
     ((I \= quit) ; halt(0)),
+    ((I \= help) ; (helper, main(Stack))),
 
     (  atom_number(I, N)
     -> main([N|Stack])
