@@ -1,4 +1,5 @@
 :- [calc].
+:- [graphicsGUI].
 :- initialization main.
 
 
@@ -43,6 +44,7 @@ helper :-
     writeln('dev          Desvio padrão amostral. Consome toda a pilha.'),
     writeln('mdc          Máximo Divisor Comum. Consome toda a pilha.'),
     writeln('mmc          Minimo Múltiplo Comum. Consome toda a pilha.'),
+    writeln('graficos     Abre uma interface gráfica para gerar gráficos de funções.'),
     writeln('-------'),
     writeln('clear        Limpa a pilha da calculadora.'),
     writeln('stack        Mostra a pilha da calculadora.'),
@@ -59,6 +61,7 @@ main(Stack) :-
     ((I \= clear) ; main([])),
     ((I \= stack) ; writeln(Stack), main(Stack)),
     ((I \= quit) ; halt(0)),
+    ((I \= graficos) ; grafico, main(Stack)),
     ((I \= help) ; (helper, main(Stack))),
 
     (  atom_number(I, N)
