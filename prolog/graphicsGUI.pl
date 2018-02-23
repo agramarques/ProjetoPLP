@@ -148,21 +148,43 @@ submit(Template, TermA, TermB, TermC, LimAB, LimCD) :-
    string_to_atom(TermA, Term1),
    string_to_atom(TermB, Term2),
    string_to_atom(TermC, Term3),
-   atom_number(Term1, A),
-   atom_number(Term2, B),
-   atom_number(Term3, C),
    split_string(LimAB, ' ', '', L1),
    maplist(number_string, ListAB, L1),
    split_string(LimCD, ' ', '', L2),
    maplist(number_string, ListCD, L2),
    (Function \= null),
-   processGraphic(Function, A, B, C, ListAB, ListCD).
+   processGraphic(Function, Term1, Term2, Term3, ListAB, ListCD).
 
-processGraphic(Function, A, B, C, [LimA|[LimB|[]]], [LimC|[LimD|[]]]) :-
+processGraphic(identidade, Term1, Term2, _, [LimA|[LimB|[]]], [LimC|[LimD|[]]]) :-
+     atom_number(Term1, A),
+     atom_number(Term2, B),
+     writeln('chamou esse'),
+     plot_function(identidade, A, B, 0, LimA, LimB, LimC, LimD).
+
+processGraphic(xa, Term1, _, _, [LimA|[LimB|[]]], [LimC|[LimD|[]]]) :-
+  atom_number(Term1, A),
+  plot_function(xa, A, 0, 0, LimA, LimB, LimC, LimD).
+
+processGraphic(ax, Term1, _, _, [LimA|[LimB|[]]], [LimC|[LimD|[]]]) :-
+  atom_number(Term1, A),
+  plot_function(ax, A, 0, 0, LimA, LimB, LimC, LimD).
+
+processGraphic(axb, Term1, Term2, _, [LimA|[LimB|[]]], [LimC|[LimD|[]]]) :-
+    atom_number(Term1, A),
+    atom_number(Term2, B),
+    plot_function(axb, A, B, 0, LimA, LimB, LimC, LimD).
+
+processGraphic(Function, Term1, Term2, Term3, [LimA|[LimB|[]]], [LimC|[LimD|[]]]) :-
         (Function = 'cos' ; Function = 'sen') -> (
+                                                  atom_number(Term1, A),
+                                                  atom_number(Term2, B),
+                                                  atom_number(Term3, C),
                                                   NewLimA is pi * LimA,
                                                   NewLimB is pi * LimB,
                                                   plot_function(Function, A, B, C, NewLimA, NewLimB, LimC, LimD));
+                                                  atom_number(Term1, A),
+                                                  atom_number(Term2, B),
+                                                  atom_number(Term3, C),
                                                   plot_function(Function, A, B, C, LimA, LimB, LimC, LimD).
 
 plot_function(Function, A, B, C, From, To, BOTTOM, TOP) :-
