@@ -158,7 +158,6 @@ submit(Template, TermA, TermB, TermC, LimAB, LimCD) :-
 processGraphic(identidade, Term1, Term2, _, [LimA|[LimB|[]]], [LimC|[LimD|[]]]) :-
      atom_number(Term1, A),
      atom_number(Term2, B),
-     writeln('chamou esse'),
      plot_function(identidade, A, B, 0, LimA, LimB, LimC, LimD).
 
 processGraphic(xa, Term1, _, _, [LimA|[LimB|[]]], [LimC|[LimD|[]]]) :-
