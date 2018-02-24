@@ -149,11 +149,16 @@ submit(Template, TermA, TermB, TermC, LimAB, LimCD) :-
    string_to_atom(TermB, Term2),
    string_to_atom(TermC, Term3),
    split_string(LimAB, ' ', '', L1),
-   maplist(number_string, ListAB, L1),
    split_string(LimCD, ' ', '', L2),
-   maplist(number_string, ListCD, L2),
+   treatInterval(L1, L2, ListAB, ListCD),
    (Function \= null),
    processGraphic(Function, Term1, Term2, Term3, ListAB, ListCD).
+
+treatInterval(List1, List2, List1Treat, List2Treat) :-
+  (List1 = [_|[]], List2 = [_|[]], List1Treat = [0, 5], List2Treat = [0, 5]) ;
+  (List1 = [_|[]], List2 \= [_|[]], List1Treat = [0,5], maplist(number_string, List2Treat, List2));
+  (List1 \= [_|[]], List2 = [_|[]], List2Treat = [0,5], maplist(number_string, List1Treat, List1));
+  (maplist(number_string, List1Treat, List1), maplist(number_string, List2Treat, List2)).
 
 processGraphic(identidade, Term1, Term2, _, [LimA|[LimB|[]]], [LimC|[LimD|[]]]) :-
      atom_number(Term1, A),
