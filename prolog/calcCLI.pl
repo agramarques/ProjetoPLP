@@ -1,11 +1,18 @@
 :- [lib/calc].
 :- [lib/graphicsGUI].
-:- initialization main.
+:- initialization(main([])).
 
+operacoes(I) :- member(I,['pi','e','ln','log','log2','exp','exp2','exp10','sqrt',
+    'square','inv','sin','cos','tan','asin','acos','atan','!','esfera','circulo','+','-',
+    '*','/','^','root','cilindro','swap','comb','arr','hipotenusa','polares',
+    'cartesianas','raizes','heron''sum','prod','mean','geom','harm','clear','var','dev',
+    'moda','mediana','mmc','mdc']).
+    
+comandos(I) :- member(I, ['clear','stack','quit','graficos','help','helpGUI']).
 
 helper :-
     writeln('Comandos disponíveis:'),
-    writeln('+ - * /      Soma, subtração, multiplicação e divisão. Requer dois números da pilha.'),
+    writeln('+ - * /      Soma,subtração,multiplicação e divisão. Requer dois números da pilha.'),
     writeln('^            Exponenciação x^y. Requer dois números da pilha.'),
     writeln('!            Fatorial. Requer um número da pilha.'),
     writeln('root         Exponenciação x^(1/y). Requer dois números da pilha.'),
@@ -58,20 +65,28 @@ grafico_help :-
     writeln('Depois, o usuário pode definir os limites da plotagem no gráfico (caso nao seja definido, os limites serão 0 5'),
     writeln('Após clicar em "plotar" uma nova aba gráfica abrirá e será mostrado um gráfico da função com os limites definicos').
 
-main :-
-    main([]).
+comandoInvalido :-
+	writeln('Comando não disponível! Veja os comandos disponíveis através do "help".').
 
 main(Stack) :-
     read_line_to_codes(user_input, Input),
     string_to_atom(Input, I),
-
-    ((I \= clear) ; main([])),
-    ((I \= stack) ; writeln(Stack), main(Stack)),
-    ((I \= quit) ; halt(0)),
-    ((I \= graficos) ; grafico, main(Stack)),
-    ((I \= helpGUI) ; grafico_help, main(Stack)),
-    ((I \= help) ; (helper, main(Stack))),
-
-    (  atom_number(I, N)
-    -> main([N|Stack])
-    ;  oper(I, Stack, [R|Rs]), writeln(R), main([R|Rs])).
+    (    comandos(I) ->
+        ((I \= clear) ; main([])),
+        ((I \= stack) ; writeln(Stack), main(Stack)),
+        ((I \= quit) ; halt(0)),
+        ((I \= graficos) ; grafico, main(Stack)),
+        ((I \= helpGUI) ; grafico_help, main(Stack)),
+        ((I \= help) ; helper, main(Stack))
+	; (    operacoes(I) ->
+        oper(I, Stack, [R|Rs]), writeln(R), main([R|Rs])
+        ; (  atom_number(I, N) -> main([N|Stack])
+            ; comandoInvalido, main(Stack)
+           )
+       )
+    ).
+    
+    
+    
+    
+    
