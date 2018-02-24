@@ -81,10 +81,7 @@ main(Stack) :-
 	; (    operacoes(I) ->
         oper(I, Stack, [R|Rs]), writeln(R), main([R|Rs])
         ; (  atom_number(I, N) -> main([N|Stack])
-            ; comandoInvalido, main(Stack)
-           )
-       )
-    ).
+            ; comandoInvalido, main(Stack)))).
     
     
     
