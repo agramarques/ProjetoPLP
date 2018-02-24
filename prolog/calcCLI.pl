@@ -49,7 +49,14 @@ helper :-
     writeln('clear        Limpa a pilha da calculadora.'),
     writeln('stack        Mostra a pilha da calculadora.'),
     writeln('quit         Sai da calculadora.'),
-    writeln('help         Mostra os comandos disponiveis da calculadora.').
+    writeln('help         Mostra os comandos disponiveis da calculadora.'),
+    writeln('helpGUI      Mostra como utilizar a interface gráfica gerar gráficos de funções.').
+    
+grafico_help :-
+    writeln('-------'),
+    writeln('Ao rodar o comando "graficos", abrirá uma janela de plotagem'),
+    writeln('Em seguida, o usuário deverá selecionar o tipo de função e definir os valores para A, B e C (se necessário).'),
+    writeln('Depois, o usuário pode definir os limites da plotagem no gráfico (caso nao seja definido, os limites serão 0 5').
 
 main :-
     main([]).
@@ -62,6 +69,7 @@ main(Stack) :-
     ((I \= stack) ; writeln(Stack), main(Stack)),
     ((I \= quit) ; halt(0)),
     ((I \= graficos) ; grafico, main(Stack)),
+    ((I \= helpGUI) ; grafico_help, main(Stack)),
     ((I \= help) ; (helper, main(Stack))),
 
     (  atom_number(I, N)
