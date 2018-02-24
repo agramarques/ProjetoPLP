@@ -1,5 +1,5 @@
-:- [calc].
-:- [graphicsGUI].
+:- [lib/calc].
+:- [lib/graphicsGUI].
 :- initialization main.
 
 
@@ -53,10 +53,10 @@ helper :-
     writeln('helpGUI      Mostra como utilizar a interface gráfica gerar gráficos de funções.').
     
 grafico_help :-
-    writeln('-------'),
     writeln('Ao rodar o comando "graficos", abrirá uma janela de plotagem'),
     writeln('Em seguida, o usuário deverá selecionar o tipo de função e definir os valores para A, B e C (se necessário).'),
-    writeln('Depois, o usuário pode definir os limites da plotagem no gráfico (caso nao seja definido, os limites serão 0 5').
+    writeln('Depois, o usuário pode definir os limites da plotagem no gráfico (caso nao seja definido, os limites serão 0 5'),
+    writeln('Após clicar em "plotar" uma nova aba gráfica abrirá e será mostrado um gráfico da função com os limites definicos').
 
 main :-
     main([]).

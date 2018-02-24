@@ -1,6 +1,6 @@
-:- [calc].
+:- [lib/calc].
 :- dynamic dialog/2.
-:- [graphicsGUI].
+:- [lib/graphicsGUI].
 :- initialization main.
 
 
