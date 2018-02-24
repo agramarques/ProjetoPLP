@@ -60,10 +60,11 @@ helper :-
     writeln('helpGUI      Mostra como utilizar a interface gráfica gerar gráficos de funções.').
     
 grafico_help :-
-    writeln('Ao rodar o comando "graficos", abrirá uma janela de plotagem'),
-    writeln('Em seguida, o usuário deverá selecionar o tipo de função e definir os valores para A, B e C (se necessário).'),
-    writeln('Depois, o usuário pode definir os limites da plotagem no gráfico (caso nao seja definido, os limites serão 0 5'),
-    writeln('Após clicar em "plotar" uma nova aba gráfica abrirá e será mostrado um gráfico da função com os limites definicos').
+    writeln('*    Ao rodar o comando "graficos", abrirá uma janela de plotagem'),
+    writeln('*    Em seguida, o usuário deverá selecionar o tipo de função e definir os valores para A, B e C (se necessário).'),
+    writeln('*    Depois, o usuário pode definir os limites da plotagem no gráfico (caso nao seja definido, os limites serão 0 5'),
+    writeln('*    Após clicar em "plotar" uma nova aba gráfica abrirá e será mostrado um gráfico da função com os limites definicos'),
+    writeln('**   (OBS: Caso uma função seja selecionada sem os parâmetros, que sejam necessários, serem preenchidos, o gráfico não será gerado!)').
 
 comandoInvalido :-
 	writeln('Comando não disponível! Veja os comandos disponíveis através do "help".').
@@ -82,8 +83,3 @@ main(Stack) :-
         oper(I, Stack, [R|Rs]), writeln(R), main([R|Rs])
         ; (  atom_number(I, N) -> main([N|Stack])
             ; comandoInvalido, main(Stack)))).
-    
-    
-    
-    
-    
