@@ -1,5 +1,6 @@
 :- [lib/calc].
 :- [lib/graphicsGUI].
+:- use_module(library(tty)).
 :- initialization(main([])).
 
 operacoes(I) :- member(I,['pi','e','ln','log','log2','exp','exp2','exp10','sqrt',
@@ -80,10 +81,6 @@ main(Stack) :-
         ((I \= helpGUI) ; grafico_help, main(Stack)),
         ((I \= help) ; helper, main(Stack))
 	; (    operacoes(I) ->
-          %% para windows:
-          oper(I, Stack, [R|Rs]), format('~c~s', [0x1b, "[2J"]), lines([R|Rs]), main([R|Rs]);
-          /* para linux:
-             oper(I, Stack, [R|Rs]), ttyclear, lines([R|Rs]), main([R|Rs]);
-          */
+          oper(I, Stack, [R|Rs]), (format('~c~s', [0x1b, "[2J"]); ttyclear), lines([R|Rs]), main([R|Rs]);
           (  atom_number(I, N) -> main([N|Stack])
             ; comandoInvalido, main(Stack)))).
