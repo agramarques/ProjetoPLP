@@ -1,3 +1,5 @@
+lines(X) :- reverse(X, R), atomics_to_string(R, '\n', OutS), write(OutS), write('\n').
+
 fatorial(N, R) :- fatorial(N, 1, R).
 fatorial(N, R, R) :- N<1, !.
 fatorial(N, Acc, R) :-

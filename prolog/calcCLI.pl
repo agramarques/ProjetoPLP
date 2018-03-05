@@ -7,7 +7,7 @@ operacoes(I) :- member(I,['pi','e','ln','log','log2','exp','exp2','exp10','sqrt'
     '*','/','^','root','cilindro','swap','comb','arr','hipotenusa','polares',
     'cartesianas','raizes','heron''sum','prod','mean','geom','harm','clear','var','dev',
     'moda','mediana','mmc','mdc']).
-    
+
 comandos(I) :- member(I, ['clear','stack','quit','graficos','help','helpGUI']).
 
 helper :-
@@ -58,7 +58,7 @@ helper :-
     writeln('quit         Sai da calculadora.'),
     writeln('help         Mostra os comandos disponiveis da calculadora.'),
     writeln('helpGUI      Mostra como utilizar a interface gráfica gerar gráficos de funções.').
-    
+
 grafico_help :-
     writeln('*    Ao rodar o comando "graficos", abrirá uma janela de plotagem'),
     writeln('*    Em seguida, o usuário deverá selecionar o tipo de função e definir os valores para A, B e C (se necessário).'),
@@ -75,11 +75,15 @@ main(Stack) :-
     (    comandos(I) ->
         ((I \= clear) ; main([])),
         ((I \= stack) ; writeln(Stack), main(Stack)),
-        ((I \= quit) ; halt(0)),
+        ((I \= quit) ; abort),
         ((I \= graficos) ; grafico, main(Stack)),
         ((I \= helpGUI) ; grafico_help, main(Stack)),
         ((I \= help) ; helper, main(Stack))
 	; (    operacoes(I) ->
-        oper(I, Stack, [R|Rs]), writeln(R), main([R|Rs])
-        ; (  atom_number(I, N) -> main([N|Stack])
+          %% para windows:
+          oper(I, Stack, [R|Rs]), format('~c~s', [0x1b, "[2J"]), lines([R|Rs]), main([R|Rs]);
+          /* para linux:
+             oper(I, Stack, [R|Rs]), ttyclear, lines([R|Rs]), main([R|Rs]);
+          */
+          (  atom_number(I, N) -> main([N|Stack])
             ; comandoInvalido, main(Stack)))).
