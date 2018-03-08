@@ -6,7 +6,7 @@
 operacoes(I) :- member(I,['pi','e','ln','log','log2','exp','exp2','exp10','sqrt',
     'square','inv','sin','cos','tan','asin','acos','atan','!','esfera','circulo','+','-',
     '*','/','^','root','cilindro','swap','comb','arr','hipotenusa','polares',
-    'cartesianas','raizes','heron''sum','prod','mean','geom','harm','clear','var','dev',
+    'cartesianas','raizes','heron','sum','prod','mean','geom','harm','clear','var','dev',
     'moda','mediana','mmc','mdc']).
 
 comandos(I) :- member(I, ['clear','stack','quit','graficos','help','helpGUI']).
