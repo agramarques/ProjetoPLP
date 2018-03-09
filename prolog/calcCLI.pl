@@ -49,22 +49,21 @@ help :-
     writeln('help         Mostra os comandos disponiveis da calculadora.'),
     writeln('-------').
 
-clear :-
-    format('~c~s', [0x1b, "[2J"]).
 
 main :-
     prompt(_, ''),
-    clear,
+    tty_clear,
     main([]).
+
 
 main(Stack) :-
     read_line_to_codes(user_input, Input),
     string_to_atom(Input, I),
 
-    (\+(I = 'clear') ; clear, main([])),
+    (\+(I = 'clear') ; tty_clear, main([])),
     (\+(I = 'quit') ; halt(0)),
-    (\+(I = 'help') ; clear, help, lines(Stack), main(Stack)),
+    (\+(I = 'help') ; tty_clear, help, lines(Stack), main(Stack)),
 
     (  atom_number(I, N) 
     -> main([N|Stack])
-    ;  oper(I, Stack, [R|Rs]), writeln(R), clear, lines([R|Rs]), main([R|Rs])).
+    ;  oper(I, Stack, [R|Rs]), tty_clear, lines([R|Rs]), main([R|Rs])).
