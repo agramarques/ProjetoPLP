@@ -66,4 +66,4 @@ main(Stack) :-
 
     (  atom_number(I, N) 
     -> main([N|Stack])
-    ;  oper(I, Stack, [R|Rs]), tty_clear, lines([R|Rs]), main([R|Rs])).
+    ;  oper(I, Stack, S), tty_clear, lines(S), main(S)).
