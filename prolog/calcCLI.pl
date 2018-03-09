@@ -60,9 +60,9 @@ main(Stack) :-
     read_line_to_codes(user_input, Input),
     string_to_atom(Input, I),
 
-    (\+(I = 'clear') ; tty_clear, main([])),
-    (\+(I = 'quit') ; halt(0)),
-    (\+(I = 'help') ; tty_clear, help, lines(Stack), main(Stack)),
+    ((I \= quit) ; halt(0)),
+    ((I \= clear) ; tty_clear, main([])),
+    ((I \= help) ; tty_clear, help, lines(Stack), main(Stack)),
 
     (  atom_number(I, N) 
     -> main([N|Stack])
